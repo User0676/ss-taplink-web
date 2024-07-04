@@ -1,0 +1,19 @@
+.cartModal {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #ddd;
+  transition: bottom 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.show {
+  bottom: 0;
+}
+
+.modalContent {
+  padding: 16px;
+  text-align: center;
+}

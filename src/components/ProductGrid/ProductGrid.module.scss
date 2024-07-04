@@ -1,0 +1,44 @@
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.class-rating{.product-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 300px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .star-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    margin-top: 8px;
+  }
+
+  .star {
+    color: lightgray;
+    margin: 0 2px;
+  }
+
+  .star.filled {
+    color: black;
+  }}

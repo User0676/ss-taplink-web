@@ -68,3 +68,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+ОТ АЛИ: 
+
+1) Реализована корзина для его включения нужно в ProductDetailsModal.jsx
+   ProductCard.jsx убрать комменты и появится корзина с добавлением.

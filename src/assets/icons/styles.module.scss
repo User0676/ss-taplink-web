@@ -1,0 +1,10 @@
+/* Save this as styles.css */
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-icon {
+    animation: rotate 1.3s linear infinite;
+}

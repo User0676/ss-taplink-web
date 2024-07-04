@@ -1,0 +1,210 @@
+@import '../../../app/styles/color-variables.scss';
+
+.input-div {
+  display: flex;
+  align-items: center;
+}
+
+.input-container {
+  border: 1px solid $gray-300;
+  border-radius: 10px;
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  width: auto;
+  position: relative;
+  gap: 8px;
+  &:focus-within {
+    border-color: $gray-500;
+  }
+
+  &.input-large-size{
+    height: 48px;
+  }
+  &.mobile{
+    height: 32px!important;
+  }
+}
+
+.input {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  border: none;
+  cursor: inherit;
+  width: 100%;
+  height: 100%;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #bdbdbd;
+  }
+
+  &:disabled {
+    background-color: white;
+    color: $gray-500;
+  }
+}
+
+.password {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.label {
+  position: absolute;
+  top: -9.6px;
+  left: 16px;
+  font-size: 12px;
+  background-color: white;
+  padding: 0 5px;
+  line-height: 18px;
+  font-weight: 400;
+  color: $gray-700;
+}
+
+.clear {
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 5px;
+  display: flex;
+
+  &:hover {
+    background-color: #fafafa;
+  }
+}
+
+.disabled {
+  border-color: $gray-300;
+  color: $gray-500 !important;
+}
+
+.input-container.disabled .label {
+  color: $gray-500 !important;
+}
+
+.div {
+  width: 100%;
+}
+
+.div .message {
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 400;
+
+  &.default {
+    color: #1c1c1c;
+  }
+
+  &.error {
+    color: #d41900;
+  }
+
+  &.success {
+    color: #21a742;
+  }
+}
+
+@keyframes width-shrink {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes width-grow {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes show {
+  0% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+@keyframes hide {
+  0% {
+    visibility: visible;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+.search-input {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: 40px;
+  @media (max-width: 768px) {
+    max-width: 228px;
+    height: 32px;
+  }
+
+  .input-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 40px;
+    transition: width 0.5s ease-in-out;
+
+    .prefix-icon {
+      padding-right: 8px;
+    }
+
+    &.visible {
+      animation:
+              width-grow 0.5s forwards,
+              show 0s 0.5s forwards;
+    }
+
+    &.hidden {
+      animation:
+              width-shrink 0.5s forwards,
+              hide 0s 0.5s forwards;
+    }
+  }
+}
+
+
+.increment-decrement-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+
+  .increment-button,
+  .decrement-button {
+    cursor: pointer;
+    padding: 0px;
+    border-radius: 50%;
+    &:hover {
+      background-color: #FFFFFF;
+    }
+  }
+
+  .increment-button {
+    margin-bottom: 1px;
+  }
+
+  .decrement-button{
+    transform: rotate(180deg);
+  }
+}
