@@ -8,7 +8,7 @@ import FilterListIcon from '@mui/icons-material/Tune';
 import SortIcon from '@mui/icons-material/Sort';
 import { CartContext } from '../../contexts/CartContext';
 
-const FilterSortControls = ({ onViewChange }) => {
+const FilterSortControls = ({ onViewChange, onSortChange }) => {
     const { openFilterModal, openSortModal, sortType } = useContext(CartContext);
 
     return (

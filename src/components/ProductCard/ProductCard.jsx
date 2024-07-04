@@ -39,10 +39,10 @@ const ProductCard = ({ product }) => {
     };
     return (
         <div className={styles.productCard} onClick={handleOpenProductDetails}>
-            <img src={product.image} alt={product.name} className={styles.productImage} />
+            <img src={product.img} alt={product.name} className={styles.productImage} />
             <div className={styles.productDetails}>
-                <StyledRating name="read-only" value={product.rating} readOnly />
-                <p>{product.reviewsCount} отзывов</p>
+                <StyledRating name="read-only" value={product.reviews?.rating || 0} readOnly />
+                <p>{product.reviews?.rewiewsAmount || "Нет "} отзывов</p>
                 {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
                 <h2>{product.name}</h2>
                 <p>{product.description}</p>

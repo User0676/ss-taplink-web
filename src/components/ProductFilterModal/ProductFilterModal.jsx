@@ -2,14 +2,15 @@ import React, { useContext, useState } from 'react';
 import styles from './ProductFilterModal.module.scss';
 import { CartContext } from '../../contexts/CartContext';
 import Button from '@mui/material/Button';
-import { filters } from '../../data/filters';
 
-const ProductFilterModal = () => {
+const ProductFilterModal = ({onFilterApply, categories, brands, minPrice, maxPrice, characteristics}) => {
     const { isFilterModalOpen, closeFilterModal } = useContext(CartContext);
     const [filter, setFilter] = useState({
         category: '',
         brand: '',
-        priceRange: [filters.minPrice, filters.maxPrice],
+        //priceRange: [filters.minPrice, filters.maxPrice],
+        minPrice: minPrice,
+        maxPrice: maxPrice,
         characteristics: {}
     });
 
@@ -30,8 +31,13 @@ const ProductFilterModal = () => {
 
     const handleApplyFilter = () => {
         // Logic to apply filter
+        onFilterApply(filter);
         closeFilterModal();
     };
+
+    if (!categories || !brands) {
+        return null;
+    }
 
     return (
         <div className={`${styles.productFilterModal} ${isFilterModalOpen ? styles.show : ''}`}>
@@ -44,7 +50,7 @@ const ProductFilterModal = () => {
                     <h3>Категории</h3>
                     <select name="category" onChange={handleFilterChange}>
                         <option value="">Все</option>
-                        {filters.categories.map((category) => (
+                        {categories.map((category) => (
                             <option key={category} value={category}>{category}</option>
                         ))}
                     </select>
@@ -54,7 +60,7 @@ const ProductFilterModal = () => {
                     <h3>Бренды</h3>
                     <select name="brand" onChange={handleFilterChange}>
                         <option value="">Все</option>
-                        {filters.brands.map((brand) => (
+                        {brands.map((brand) => (
                             <option key={brand} value={brand}>{brand}</option>
                         ))}
                     </select>
@@ -65,30 +71,30 @@ const ProductFilterModal = () => {
                     <input
                         type="range"
                         name="priceRange"
-                        min={filters.minPrice}
-                        max={filters.maxPrice}
+                        min={minPrice}
+                        max={maxPrice}
                         value={filter.priceRange}
                         onChange={(e) =>
-                            setFilter({ ...filter, priceRange: [e.target.value, filter.priceRange[1]] })
+                            setFilter({ ...filter, minPrice: e.target.value })
                         }
                     />
                     <input
                         type="range"
                         name="priceRange"
-                        min={filters.minPrice}
-                        max={filters.maxPrice}
+                        min={minPrice}
+                        max={maxPrice}
                         value={filter.priceRange}
                         onChange={(e) =>
-                            setFilter({ ...filter, priceRange: [filter.priceRange[0], e.target.value] })
+                            setFilter({ ...filter, maxPrice: e.target.value })
                         }
                     />
                     <div>
-                        <span>от {filter.priceRange[0]} т</span>
-                        <span>до {filter.priceRange[1]} т</span>
+                        <span>от {filter.minPrice} т</span>
+                        <span>до {filter.maxPrice} т</span>
                     </div>
                 </div>
 
-                {filters.characteristics.map((characteristic) => (
+                {characteristics.map((characteristic) => (
                     <div key={characteristic.name} className={styles.filterSection}>
                          <h3>{characteristic.name}</h3>
                         {characteristic.values.map((value) => (
