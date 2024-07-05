@@ -6,8 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarIcon from '@mui/icons-material/Star';
 import axios from "axios";
 import { config } from "../../config";
-
-
+import Loading from '../Loading/Loading';
 
 
 const formatNumber = (num) => {
@@ -19,6 +18,7 @@ const ProductDetailsModal = () => {
     const [productData, setProductData] = useState(null);
 
     const getProductData = async () => {
+        setProductData(null)
         if (!selectedProduct) {
             return;
         }
@@ -37,7 +37,7 @@ const ProductDetailsModal = () => {
         getProductData();
     }, [selectedProduct]);
 
-    if (!selectedProduct || !productData) {
+    if (!selectedProduct) {
         return null;
     }
 
@@ -102,9 +102,12 @@ const ProductDetailsModal = () => {
                 </div>
                 </div>
 
-                <div className={styles.productDetails}>
-                    <h2 className={styles.descriptionName}>Характеристики</h2>
-                    {renderCharacteristics(productData.characteristics)}
+                {!productData && <><Loading/></>}
+
+                {productData &&
+                    <div className={styles.productDetails}>
+                        <h2 className={styles.descriptionName}>Характеристики</h2>
+                        {renderCharacteristics(productData.characteristics)}
 
 
                     <div className={styles.reviewComponents}>
@@ -136,7 +139,7 @@ const ProductDetailsModal = () => {
 
 
                     </div>
-                </div>
+                </div>}
 
                 {/*  <Button
                     variant="contained"

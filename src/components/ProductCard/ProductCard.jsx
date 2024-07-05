@@ -61,6 +61,23 @@ const ProductCard = ({ product }) => {
                     <p className={styles.rassrochkaMonth}>х12</p>
                     </div>
                 </div>
+                <div class="ks-widget"
+                    data-template="button"
+                    data-merchant-sku={product.sku}
+                    data-merchant-code="1037016"
+                    data-city="750000000"
+                    data-style="desktop"
+                ></div>
+
+                <script>{function(d, s, id) {
+                        let js, kjs;
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = 'https://kaspi.kz/kaspibutton/widget/ks-wi_ext.js';
+                        kjs = document.getElementsByTagName(s)[0]
+                        kjs.parentNode.insertBefore(js, kjs);
+                    }(document, 'script', 'KS-Widget')}
+                </script>
                 {/*<Button
                     variant="contained"
                     color="primary"

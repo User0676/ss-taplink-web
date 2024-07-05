@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ProductGrid.module.scss';
 import ProductCard from '../ProductCard/ProductCard';
+import Loading from '../Loading/Loading';
 // const products = [
 //     {
 //         id: 1,
@@ -101,7 +102,9 @@ const sortProducts = (products, sortType) => {
 const ProductGrid = ({ viewType, sortType, products, isLoading }) => {
     if (!products || isLoading) {
         return (
-        <>Loading</>
+            <>
+                <Loading/>
+            </>
         );
     }
     console.log(products)

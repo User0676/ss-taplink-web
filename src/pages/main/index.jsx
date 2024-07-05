@@ -20,6 +20,7 @@ export const Home = () => {
     const [viewType, setViewType] = useState('grid');
     const [id, setId] = useState(useParams().storeId)
     const [isLoading, setIsLoading] = useState(true);
+    const [filterIsLoading, setfilterIsLoading] = useState(false)
 
     const [title, setTitle] = useState('');
 
@@ -48,10 +49,16 @@ export const Home = () => {
     }, [body])
 
     const onFilterApply = (filter) => {
-        setBody({...body, ...filter})
+        setBody({
+            ...body,
+            brand: filter.brand,
+            category: filter.category,
+            filters: Object.entries(filter.characteristics).map(([name, values]) => ({name, values}))
+        })
     };
 
     const fetchProducts = () => {
+        console.log(body)
         setIsLoading(true)
         axios.post(`${config.apiUrl}/products/${id}`, body).then((response) => {
             setProducts(response.data)
@@ -61,6 +68,18 @@ export const Home = () => {
             console.log(error)
             setIsLoading(false)
         })
+    }
+
+    const fetchFilters = (filter) => {
+        console.log({...body, ...filter})
+        setfilterIsLoading(true)
+        axios.post(`${config.apiUrl}/filter-preview/${id}`, {...body, ...filter}).then((response) => {
+            console.log(response.data)
+            setProducts({...products, filter: response.data})
+            console.log(products)
+        }).catch((error) => {
+            console.log(error)
+        }).finally(() => setfilterIsLoading(false))
     }
 
     const fetchStoreData = (id) => {
@@ -99,9 +118,11 @@ export const Home = () => {
                     onFilterApply={onFilterApply}
                     categories={products.filter?.categories}
                     brands={products.filter?.brands}
-                    minPrice={products.minPrice}
-                    maxPrice={products.maxPrice}
+                    minPrice={products.filter?.minPrice}
+                    maxPrice={products.filter?.maxPrice}
                     characteristics={products.filter?.availableFilters}
+                    onChange={fetchFilters}
+                    isLoading={filterIsLoading}
                 />
                 <SortModal onSortChange={handleSortChange} />
             </div>

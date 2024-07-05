@@ -1,16 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './ProductFilterModal.module.scss';
 import { CartContext } from '../../contexts/CartContext';
 import Button from '@mui/material/Button';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
+import Loading from '../Loading/Loading';
+import BoxedCheckbox from '../Checkbox/checkbox';
 
 function valuetext(value) {
     return `${value}°C`;
 }
 
-function RangeSlider() {
-    const [value, setValue] = React.useState([20, 37]);
+function RangeSlider({ minPrice, maxPrice, onChange }) {
+    const [value, setValue] = React.useState([minPrice, maxPrice]);
+
+    useState(() => {
+        setValue([minPrice, maxPrice])
+    }, [minPrice, maxPrice])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -29,19 +35,39 @@ function RangeSlider() {
     );
 }
 
-const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPrice, characteristics }) => {
+const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPrice, characteristics, onChange, isLoading }) => {
     const { isFilterModalOpen, closeFilterModal } = useContext(CartContext);
+    //const [isLoading, setIsLoading] = useState(false)
     const [filter, setFilter] = useState({
         category: '',
         brand: '',
         minPrice: minPrice,
         maxPrice: maxPrice,
-        characteristics: {}
+        characteristics: {},
     });
+
+    useEffect(() => {
+        setFilter((prevFilter) => ({ ...prevFilter, minPrice, maxPrice }));
+    }, [minPrice, maxPrice])
+
+    useEffect(() => {
+        //setIsLoading(false)
+    }, [filter.characteristics])
 
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
-        setFilter((prevFilter) => ({ ...prevFilter, [name]: value }));
+        if (name === "category") {
+            //setIsLoading(true)
+            setFilter((prevFilter) => ({
+                ...prevFilter,
+                characteristics: {},
+                category: value
+            }))
+        } else {
+            setFilter((prevFilter) => ({ ...prevFilter, [name]: value }));
+        }
+
+        onChange({ ...filter, [name]: value })
     };
 
     const handleCharacteristicChange = (name, value) => {
@@ -60,7 +86,7 @@ const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPr
     };
 
     if (!categories || !brands) {
-        return null;
+        return <Loading/>;
     }
 
     return (
@@ -94,33 +120,44 @@ const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPr
 
                 <div className={styles.filterSection}>
                     <h3>Цена</h3>
-                    <RangeSlider />
+                    <RangeSlider minPrice={filter.minPrice} maxPrice={filter.minPrice} onChange={handleFilterChange} />
                     <div>
-                        <span>от {filter.minPrice} т</span>
-                        <span>до {filter.maxPrice} т</span>
+                        <span>от {filter.minPrice?.toString()} т </span>
+                        <span>до {filter.maxPrice?.toString()} т</span>
                     </div>
                 </div>
 
-                {characteristics.map((characteristic) => (
+                {isLoading && <><Loading/></>}
+
+                {!isLoading && characteristics.map((characteristic) => (
                     <div key={characteristic.name} className={styles.filterSection}>
                         <h3>{characteristic.name}</h3>
                         {characteristic.values.map((value) => (
-                            <label key={value}>
-                                <input
-                                    type="checkbox"
-                                    name={characteristic.name}
-                                    value={value}
-                                    onChange={(e) =>
-                                        handleCharacteristicChange(
-                                            characteristic.name,
-                                            e.target.checked
-                                                ? [...(filter.characteristics[characteristic.name] || []), value]
-                                                : (filter.characteristics[characteristic.name] || []).filter((v) => v !== value)
-                                        )
-                                    }
-                                />
-                                {value}
-                            </label>
+                            // <label key={value}>
+                            //     <input
+                            //         type="checkbox"
+                            //         name={characteristic.name}
+                            //         value={value}
+                            //         onChange={(e) =>
+                            //             handleCharacteristicChange(
+                            //                 characteristic.name,
+                            //                 e.target.checked
+                            //                     ? [...(filter.characteristics[characteristic.name] || []), value]
+                            //                     : (filter.characteristics[characteristic.name] || []).filter((v) => v !== value)
+                            //             )
+                            //         }
+                            //     />
+                            //     {value}
+                            // </label>
+                            <BoxedCheckbox
+                                value={value}
+                                onClick={(isChecked) => handleCharacteristicChange(
+                                                    characteristic.name,
+                                                    isChecked
+                                                        ? [...(filter.characteristics[characteristic.name] || []), value]
+                                                        : (filter.characteristics[characteristic.name] || []).filter((v) => v !== value)
+                                                )}
+                            />
                         ))}
                     </div>
                 ))}

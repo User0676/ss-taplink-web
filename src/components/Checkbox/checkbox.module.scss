@@ -1,0 +1,33 @@
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    gap: 10px;
+}
+
+.checkbox-btn-shared {
+    color: var(--Black, var(--Colors-Basic-Black, #000));
+    font-family: "SF Pro Display";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+
+    padding: 6px 8px;
+    cursor: pointer;
+    margin: 6px;
+
+    border-radius: 15px;
+    border: 1px solid var(--Gray-100, #F5F5F5);
+    background: var(--White, #FFF);
+}
+
+.checkbox-btn {
+    border-color: #ccc;
+    background-color: #fff;
+}
+
+.checkbox-btn-selected {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
