@@ -5,31 +5,39 @@
   //left:100%;
   background-color: white;
   font-family: Inter, sans-serif;
-  justify-content: space-between; /* Позволяет растягивать контент между верхом и низом */
+  //justify-content: space-between; /* Позволяет растягивать контент между верхом и низом */
   height: 100%; // Делает карточку полной высоты контейнера
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
 
 
 }
-
+p{
+  margin:8px 0;
+}
 .productImage {
   max-width: 90%;
-  //max-height: 90%;
-  height: 150px;
+  max-height: 90%;
+
+  //height: 150px;
   object-fit: cover; // для обрезки если изображение большое
 
 }
 
 .productDetails {
+  display:flex;
+  flex-direction: column;
   margin-top: 16px;
   justify-content: space-between; /* Растягивает содержимое между верхом и низом */
-  flex-grow: 1; /* Позволяет этому элементу расти и занимать оставшееся пространство */
 
 }
 
 .price {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: normal;
+  font-family: Inter, sans-serif;
   margin: 8px 0;
 }
 
@@ -50,6 +58,7 @@
 
 .descriptionBlock{
   color:gray;
+  flex: 1 1 100%;
 }
 
 .rassrochkaContainer{
@@ -60,12 +69,12 @@
 
 .rassrochkaPrice{
   display: inline-block;
-  padding: 8px 16px;
+  padding: 5px 5px;
   background-color: #FFD700; /* Желтый цвет фона */
   border-radius: 8px; /* Закругленные углы */
   color: black; /* Черный цвет текста */
   font-size: 18px; /* Размер шрифта */
-  font-weight: bold; /* Жирный шрифт */
+  font-weight: normal; /* Жирный шрифт */
   font-family: Inter, sans-serif; /* Шрифт */
   margin-right : 5px;
 
@@ -77,4 +86,10 @@
   font-size: 16px;
   margin-bottom: 0;
 
+}
+.imageFormat{
+  height : 158px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

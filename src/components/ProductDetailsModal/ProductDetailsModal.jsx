@@ -7,6 +7,13 @@ import StarIcon from '@mui/icons-material/Star';
 import axios from "axios";
 import { config } from "../../config";
 
+
+
+
+const formatNumber = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+};
+
 const ProductDetailsModal = () => {
     const { selectedProduct, closeProductDetails, addToCart } = useContext(CartContext);
     const [productData, setProductData] = useState(null);
@@ -77,7 +84,7 @@ const ProductDetailsModal = () => {
 
                 <div className={styles.reviewComponent}>
                     <StarIcon className={styles.reviewIcon}/>
-                    <p>{productData.AverageRating.toFixed(2)} </p>
+                    <p>{productData.AverageRating?.toFixed(2)} </p>
                     <span className={styles.reviewNumComponent}>({productData.reviewsAmount} отзывов)</span>
                 </div>
 
@@ -86,11 +93,11 @@ const ProductDetailsModal = () => {
 
 
                 <p>{selectedProduct.description}</p>
-                <div className={styles.price}>{selectedProduct.price} т
+                <div className={styles.price}>{formatNumber(selectedProduct.price)} т
 
 
                 <div className={styles.rassrochkaContainer}>
-                    <p className={styles.rassrochkaPrice}>{parseInt(selectedProduct.price / 12)} т</p>
+                    <p className={styles.rassrochkaPrice}>{formatNumber(parseInt(selectedProduct.price / 12))} т</p>
                     <p className={styles.rassrochkaMonth}>х12</p>
                 </div>
                 </div>
@@ -101,9 +108,10 @@ const ProductDetailsModal = () => {
 
 
                     <div className={styles.reviewComponents}>
-                        <div className={styles.reviewComponent}>
+                        <div className={styles.reviewComponent2}>
+                            <p>Оценка и Отзывы</p>
                             <StarIcon className={styles.reviewIcon}/>
-                            <p>{productData.AverageRating.toFixed(2)} </p>
+                            <p>{productData.AverageRating?.toFixed(2)} </p>
                             <span className={styles.reviewNumComponent}>({productData.reviewsAmount} отзывов)</span>
                         </div>
 
@@ -111,9 +119,14 @@ const ProductDetailsModal = () => {
                             {productData?.reviews && productData.reviews.length > 0 ? (
                                 productData.reviews.map((review) => (
                                     <div key={review.id} className={styles.review}>
-                                        <p><strong>{review.author}</strong>: {review.commentText}</p>
-                                        <p>Рейтинг: {review.rating}</p>
-                                        <p>Дата: {review.date}</p>
+
+                                        <div className={styles.mainRevInfo}>
+                                        <p className={styles.reviewAuthor}><strong>{review.author}</strong></p> <StarIcon
+                                        className={styles.reviewIcon}/>
+                                        <p className={styles.reviewDate}>{(new Date(review.date)).toLocaleDateString("en-US", {})}</p>
+                                        </div>
+                                        <p>{review.commentText}</p>
+
                                     </div>
                                 ))
                             ) : (
@@ -121,19 +134,7 @@ const ProductDetailsModal = () => {
                             )}
                         </div>
 
-                        <div className={styles.userReviews}>
-                            {productData?.reviews && productData.reviews.length > 0 ? (
-                                productData.reviews.map((review) => (
-                                    <div key={review.id} className={styles.review}>
-                                        <p><strong>{review.author}</strong>: {review.commentText}</p>
-                                        <p>Рейтинг: {review.rating}</p>
-                                        <p>Дата: {review.date}</p>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>Нету отзывов.</p>
-                            )}
-                        </div>
+
                     </div>
                 </div>
 

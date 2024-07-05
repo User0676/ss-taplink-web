@@ -1,4 +1,11 @@
 .searchBar {
   margin: 16px 0;
   border-top-left-radius: 100%;
+  flex: 1 1 100%;
+
+}
+
+.searchWithFilter{
+  display: flex;
+
 }

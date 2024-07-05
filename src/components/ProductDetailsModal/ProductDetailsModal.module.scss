@@ -64,6 +64,8 @@
   margin: 8px 0;
   position:relative;
   right: 0;
+  text-align: left;
+
 }
 
 .productDetails {
@@ -78,6 +80,15 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+  padding: 5px 5px;
+}
+.reviewComponent2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 5px 5px;
+  background-color:whitesmoke;
+  border-radius: 5%;
 }
 
 .reviewIcon {
@@ -105,20 +116,22 @@
 .descriptionBlock{
   color:gray;
   position: relative;
-  right:42%;
-  padding: 20px;
+  text-align: left;
 }
 
 .descriptionName{
   background-color: lightgrey;
-  border-radius: 5px;
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-weight: normal;
+  font-family:Inter, sans-serif;
 
 }
 
 
 .rassrochkaPrice{
   display: inline-block;
-  padding: 8px 16px;
+  padding: 5px 5px;
   background-color: #FFD700; /* Желтый цвет фона */
   border-radius: 8px; /* Закругленные углы */
   color: black; /* Черный цвет текста */
@@ -142,4 +155,20 @@
   align-items: center;
 }
 
+.mainRevInfo{
+  display: flex;
+  align-items: center;
+  position:relative;
+
+}
+
+.reviewAuthor{
+  text-align: center;
+}
+.reviewDate{
+  position:relative;
+  width: 100%;
+  text-align : right;
+  left: 0;
+}
 

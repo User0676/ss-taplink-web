@@ -13,13 +13,13 @@ const FilterSortControls = ({ onViewChange, onSortChange }) => {
 
     return (
         <div className={styles.filterSortControls}>
-            <ButtonGroup variant="outlined" aria-label="outlined button group">
-                <Button onClick={openSortModal}>
+            <ButtonGroup variant="outlined" aria-label="outlined button group" className={styles.sortAll}>
+                <Button onClick={openSortModal} className={styles.sortFull}>
                     <SortIcon /> {sortType}
                 </Button>
                 {/*  <Button onClick={() => onViewChange('grid')}><ViewModuleIcon /></Button>
                 <Button onClick={() => onViewChange('list')}><ViewListIcon /></Button> */}
-                <Button onClick={openFilterModal}><FilterListIcon /></Button>
+
             </ButtonGroup>
         </div>
     );

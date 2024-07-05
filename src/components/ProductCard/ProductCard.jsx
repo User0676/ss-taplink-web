@@ -15,6 +15,10 @@ const StyledRating = styled(Rating)({
     },
 });
 
+const formatNumber = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+};
+
 const ProductCard = ({ product }) => {
     const { addToCart, openProductDetails } = useContext(CartContext);
 
@@ -41,7 +45,7 @@ const ProductCard = ({ product }) => {
 
         <div className={styles.productCard} onClick={handleOpenProductDetails}>
 
-            <img src={product.img} alt={product.name} className={styles.productImage} />
+            <div className={styles.imageFormat}><img src={product.img} alt={product.name} className={styles.productImage} /></div>
             <div className={styles.productDetails}>
                 <div className={styles.ratingPlace}>
                     <div className={styles.ratingBlock}><StyledRating name="read-only" value={product.reviews?.rating || 0}
@@ -50,11 +54,10 @@ const ProductCard = ({ product }) => {
                 </div>
                 {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
                 <p>{product.name}</p>
-                <p >{product.description}</p>
                 <p className= {styles.descriptionBlock}>{product.category}</p>
-                <div className={styles.price}>{product.price} тг
+                <div className={styles.price}>{formatNumber(product.price)} тг
                     <div className={styles.rassrochkaContainer}>
-                    <p className={styles.rassrochkaPrice}>{parseInt(product.price / 12)} т</p>
+                    <p className={styles.rassrochkaPrice}>{formatNumber(parseInt(product.price / 12))} т</p>
                     <p className={styles.rassrochkaMonth}>х12</p>
                     </div>
                 </div>

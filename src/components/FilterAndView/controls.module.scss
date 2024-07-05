@@ -2,5 +2,17 @@
   display: flex;
   justify-content: space-between;
   margin: 16px 0;
+  width: 100%;
+
+}
+.sortAll{
+  display:block;
+  width: 100%;
+}
+
+.sortFull{
+  display:flex;
+  min-width: auto;
+  width: 100%;
 
 }
