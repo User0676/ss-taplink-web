@@ -40,6 +40,7 @@ export const CartProvider = ({ children }) => {
 
     const openFilterModal = () => {
         setIsFilterModalOpen(true);
+        setIsSortModalOpen(false);
     };
 
     const closeFilterModal = () => {

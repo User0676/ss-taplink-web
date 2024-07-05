@@ -4,19 +4,31 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: white;
-  z-index: 1000;
-  transform: translateY(100%);
-  transition: transform 0.3s ease-in-out;
-}
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  transform: translateY(-100%);
+  transition: visibility 0.3s, transform 0.3s;
 
-.show {
-  transform: translateY(0);
+  &.show {
+    visibility: visible;
+    transform: translateY(0);
+  }
 }
 
 .modalContent {
+  position: relative;
+  background: #fff;
   padding: 16px;
   text-align: center;
+  max-width: 600px;
+  width: 100%;
+  max-height: 100%; /* Limit the height to 80% of the viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .closeButton {
@@ -30,12 +42,104 @@
 }
 
 .productImage {
-  max-width: 100%;
+  align-content: center;
+  max-width: 60%;
+  margin-top: 30%;
   height: auto;
+  top:72px;
+  gap:25px;
+
 }
+
+.productName{
+  position: relative;
+  margin-top: 15%;
+  right:6%
+}
+
 
 .price {
   font-size: 24px;
   font-weight: bold;
   margin: 8px 0;
+  position:relative;
+  right: 0;
 }
+
+.productDetails {
+  text-align: left;
+}
+
+.reviewComponents {
+  margin-top: 16px;
+}
+
+.reviewComponent {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.reviewIcon {
+  margin-right: 8px;
+}
+
+.userReviews {
+  margin-top: 16px;
+}
+
+.review {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.reviewNumComponent{
+  color: #e0e0e0;
+
+}
+
+.descriptionBlock{
+  color:gray;
+  position: relative;
+  right:42%;
+  padding: 20px;
+}
+
+.descriptionName{
+  background-color: lightgrey;
+  border-radius: 5px;
+
+}
+
+
+.rassrochkaPrice{
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #FFD700; /* Желтый цвет фона */
+  border-radius: 8px; /* Закругленные углы */
+  color: black; /* Черный цвет текста */
+  font-size: 18px; /* Размер шрифта */
+  font-weight: normal; /* Жирный шрифт */
+  font-family: Inter, sans-serif; /* Шрифт */
+  margin-right : 5px;
+
+}
+
+.rassrochkaMonth{
+  color:gray;
+  font-weight: normal;
+  font-size: 16px;
+  margin-bottom: 0;
+
+}
+
+.rassrochkaContainer{
+  display:flex;
+  align-items: center;
+}
+
+

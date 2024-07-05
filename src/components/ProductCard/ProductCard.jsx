@@ -46,12 +46,12 @@ const ProductCard = ({ product }) => {
                 <div className={styles.ratingPlace}>
                     <div className={styles.ratingBlock}><StyledRating name="read-only" value={product.reviews?.rating || 0}
                                                                readOnly/></div>
-                    <div className={styles.ratingBlock}><p>{product.reviews?.rewiewsAmount || "Нет "}</p></div>
+                    <div className={styles.ratingBlock}><p>{product.reviews?.reviewsAmount || "Нет "}</p></div>
                 </div>
                 {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
                 <p>{product.name}</p>
                 <p >{product.description}</p>
-                <p className= {styles.descriptionBlock}>Диваны</p>
+                <p className= {styles.descriptionBlock}>{product.category}</p>
                 <div className={styles.price}>{product.price} тг
                     <div className={styles.rassrochkaContainer}>
                     <p className={styles.rassrochkaPrice}>{parseInt(product.price / 12)} т</p>

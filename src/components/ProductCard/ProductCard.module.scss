@@ -13,9 +13,11 @@
 }
 
 .productImage {
-  max-width: 100%;
+  max-width: 90%;
+  //max-height: 90%;
   height: 150px;
   object-fit: cover; // для обрезки если изображение большое
+
 }
 
 .productDetails {

@@ -1,16 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './ProductDetailsModal.module.scss';
 import { CartContext } from '../../contexts/CartContext';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarIcon from '@mui/icons-material/Star';
-
-
+import axios from "axios";
+import { config } from "../../config";
 
 const ProductDetailsModal = () => {
     const { selectedProduct, closeProductDetails, addToCart } = useContext(CartContext);
+    const [productData, setProductData] = useState(null);
 
-    if (!selectedProduct) {
+    const getProductData = async () => {
+        if (!selectedProduct) {
+            return;
+        }
+        try {
+            const response = await axios.get(`${config.apiUrl}/products/${selectedProduct.sku}`);
+            if (response.status === 200) {
+                setProductData(response.data);
+            }
+            console.log(response.data);
+        } catch (error) {
+            console.error("Error fetching product data:", error);
+        }
+    };
+
+    useEffect(() => {
+        getProductData();
+    }, [selectedProduct]);
+
+    if (!selectedProduct || !productData) {
         return null;
     }
 
@@ -19,25 +39,105 @@ const ProductDetailsModal = () => {
         closeProductDetails();
     };
 
+    const renderCharacteristics = (characteristics) => {
+        if (!characteristics) {
+            return null;
+        }
+
+        return (
+            <>
+                {/*<ul>
+                {Object.entries(characteristics).map(([key, value]) => (
+                    <li>{typeof value === 'object' ? renderCharacteristics(value) : value}</li>
+                ))}
+                </ul>*/}
+                <div>
+                    {characteristics.map((characteristic) => (
+                        <div>
+                            <strong>{characteristic.name}</strong>
+                            {characteristic.features.map((value) => (
+                                <div>
+                                    <p><bold>{value.name}:</bold> {value.value}</p>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            </>
+        );
+    };
+
     return (
         <div className={`${styles.productDetailsModal} ${selectedProduct ? styles.show : ''}`}>
             <div className={styles.modalContent}>
                 <button className={styles.closeButton} onClick={closeProductDetails}>✕</button>
-                <img src={selectedProduct.image} alt={selectedProduct.name} className={styles.productImage}/>
-                <h2>{selectedProduct.name}</h2>
-                <p>{selectedProduct.description}</p>
-                <div className={styles.price}>{selectedProduct.price} т</div>
-                {/*<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                    <path
-                        d="M31.547 12a.848.848 0 00-.677-.577l-9.427-1.376-4.224-8.532a.847.847 0 00-1.516 0l-4.218 8.534-9.427 1.355a.847.847 0 00-.467 1.467l6.823 6.664-1.612 9.375a.847.847 0 001.23.893l8.428-4.434 8.432 4.432a.847.847 0 001.229-.894l-1.615-9.373 6.822-6.665a.845.845 0 00.214-.869z"/>
-                </svg>*/}
-                <div className={styles.productDetails}>
 
-                    <StarIcon />
-                    <p>{selectedProduct.reviewsCount} отзывов</p>
+
+                <img src={selectedProduct.img} alt={selectedProduct.name} className={styles.productImage}/>
+
+                <div className={styles.reviewComponent}>
+                    <StarIcon className={styles.reviewIcon}/>
+                    <p>{productData.AverageRating.toFixed(2)} </p>
+                    <span className={styles.reviewNumComponent}>({productData.reviewsAmount} отзывов)</span>
                 </div>
 
-                {/*<Button
+                <h2 className={styles.productName}>{selectedProduct.name}</h2>
+                <p className={styles.descriptionBlock}>{selectedProduct.category}</p>
+
+
+                <p>{selectedProduct.description}</p>
+                <div className={styles.price}>{selectedProduct.price} т
+
+
+                <div className={styles.rassrochkaContainer}>
+                    <p className={styles.rassrochkaPrice}>{parseInt(selectedProduct.price / 12)} т</p>
+                    <p className={styles.rassrochkaMonth}>х12</p>
+                </div>
+                </div>
+
+                <div className={styles.productDetails}>
+                    <h2 className={styles.descriptionName}>Характеристики</h2>
+                    {renderCharacteristics(productData.characteristics)}
+
+
+                    <div className={styles.reviewComponents}>
+                        <div className={styles.reviewComponent}>
+                            <StarIcon className={styles.reviewIcon}/>
+                            <p>{productData.AverageRating.toFixed(2)} </p>
+                            <span className={styles.reviewNumComponent}>({productData.reviewsAmount} отзывов)</span>
+                        </div>
+
+                        <div className={styles.userReviews}>
+                            {productData?.reviews && productData.reviews.length > 0 ? (
+                                productData.reviews.map((review) => (
+                                    <div key={review.id} className={styles.review}>
+                                        <p><strong>{review.author}</strong>: {review.commentText}</p>
+                                        <p>Рейтинг: {review.rating}</p>
+                                        <p>Дата: {review.date}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>Нету отзывов.</p>
+                            )}
+                        </div>
+
+                        <div className={styles.userReviews}>
+                            {productData?.reviews && productData.reviews.length > 0 ? (
+                                productData.reviews.map((review) => (
+                                    <div key={review.id} className={styles.review}>
+                                        <p><strong>{review.author}</strong>: {review.commentText}</p>
+                                        <p>Рейтинг: {review.rating}</p>
+                                        <p>Дата: {review.date}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>Нету отзывов.</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/*  <Button
                     variant="contained"
                     color="primary"
                     startIcon={<ShoppingCartIcon />}
