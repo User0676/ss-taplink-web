@@ -38,16 +38,25 @@ const ProductCard = ({ product }) => {
         return stars;
     };
     return (
+
         <div className={styles.productCard} onClick={handleOpenProductDetails}>
+
             <img src={product.img} alt={product.name} className={styles.productImage} />
             <div className={styles.productDetails}>
-                <StyledRating name="read-only" value={product.reviews?.rating || 0} readOnly />
-                <p>{product.reviews?.rewiewsAmount || "Нет "} отзывов</p>
+                <div className={styles.ratingPlace}>
+                    <div className={styles.ratingBlock}><StyledRating name="read-only" value={product.reviews?.rating || 0}
+                                                               readOnly/></div>
+                    <div className={styles.ratingBlock}><p>{product.reviews?.rewiewsAmount || "Нет "}</p></div>
+                </div>
                 {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
-                <h2>{product.name}</h2>
-                <p>{product.description}</p>
+                <p>{product.name}</p>
+                <p >{product.description}</p>
+                <p className= {styles.descriptionBlock}>Диваны</p>
                 <div className={styles.price}>{product.price} тг
-                    <p>{parseInt(product.price/12)}х12</p>
+                    <div className={styles.rassrochkaContainer}>
+                    <p className={styles.rassrochkaPrice}>{parseInt(product.price / 12)} т</p>
+                    <p className={styles.rassrochkaMonth}>х12</p>
+                    </div>
                 </div>
                 {/*<Button
                     variant="contained"

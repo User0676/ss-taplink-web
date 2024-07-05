@@ -17,8 +17,8 @@ const FilterSortControls = ({ onViewChange, onSortChange }) => {
                 <Button onClick={openSortModal}>
                     <SortIcon /> {sortType}
                 </Button>
-                <Button onClick={() => onViewChange('grid')}><ViewModuleIcon /></Button>
-                <Button onClick={() => onViewChange('list')}><ViewListIcon /></Button>
+                {/*  <Button onClick={() => onViewChange('grid')}><ViewModuleIcon /></Button>
+                <Button onClick={() => onViewChange('list')}><ViewListIcon /></Button> */}
                 <Button onClick={openFilterModal}><FilterListIcon /></Button>
             </ButtonGroup>
         </div>

@@ -1,22 +1,78 @@
 .productCard {
-  border: 1px solid #ddd;
+  border: 1px solid white;
   padding: 16px;
   border-radius: 8px;
-  text-align: center;
+  //left:100%;
   background-color: white;
+  font-family: Inter, sans-serif;
+  justify-content: space-between; /* Позволяет растягивать контент между верхом и низом */
+  height: 100%; // Делает карточку полной высоты контейнера
+
+
+
 }
 
 .productImage {
   max-width: 100%;
-  height: auto;
+  height: 150px;
+  object-fit: cover; // для обрезки если изображение большое
 }
 
 .productDetails {
   margin-top: 16px;
+  justify-content: space-between; /* Растягивает содержимое между верхом и низом */
+  flex-grow: 1; /* Позволяет этому элементу расти и занимать оставшееся пространство */
+
 }
 
 .price {
   font-size: 24px;
   font-weight: bold;
   margin: 8px 0;
+}
+
+.ratingPlace{
+  display:flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+}
+
+.ratingBlock {
+  position: relative;
+  display: inline-block;
+  border: 1px solid white;
+  margin: 2px;
+  color: gray;
+}
+
+.descriptionBlock{
+  color:gray;
+}
+
+.rassrochkaContainer{
+  display:flex;
+  align-items: center;
+}
+
+
+.rassrochkaPrice{
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #FFD700; /* Желтый цвет фона */
+  border-radius: 8px; /* Закругленные углы */
+  color: black; /* Черный цвет текста */
+  font-size: 18px; /* Размер шрифта */
+  font-weight: bold; /* Жирный шрифт */
+  font-family: Inter, sans-serif; /* Шрифт */
+  margin-right : 5px;
+
+}
+
+.rassrochkaMonth{
+  color:gray;
+  font-weight: normal;
+  font-size: 16px;
+  margin-bottom: 0;
+
 }

@@ -2,13 +2,38 @@ import React, { useContext, useState } from 'react';
 import styles from './ProductFilterModal.module.scss';
 import { CartContext } from '../../contexts/CartContext';
 import Button from '@mui/material/Button';
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
 
-const ProductFilterModal = ({onFilterApply, categories, brands, minPrice, maxPrice, characteristics}) => {
+function valuetext(value) {
+    return `${value}°C`;
+}
+
+function RangeSlider() {
+    const [value, setValue] = React.useState([20, 37]);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    return (
+        <Box sx={{ width: 460 }}>
+            <Slider
+                getAriaLabel={() => 'Temperature range'}
+                value={value}
+                onChange={handleChange}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+            />
+        </Box>
+    );
+}
+
+const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPrice, characteristics }) => {
     const { isFilterModalOpen, closeFilterModal } = useContext(CartContext);
     const [filter, setFilter] = useState({
         category: '',
         brand: '',
-        //priceRange: [filters.minPrice, filters.maxPrice],
         minPrice: minPrice,
         maxPrice: maxPrice,
         characteristics: {}
@@ -30,7 +55,6 @@ const ProductFilterModal = ({onFilterApply, categories, brands, minPrice, maxPri
     };
 
     const handleApplyFilter = () => {
-        // Logic to apply filter
         onFilterApply(filter);
         closeFilterModal();
     };
@@ -48,17 +72,19 @@ const ProductFilterModal = ({onFilterApply, categories, brands, minPrice, maxPri
                 <div className={styles.filterSection}>
                     <h3>Доставка</h3>
                     <h3>Категории</h3>
-                    <select name="category" onChange={handleFilterChange}>
-                        <option value="">Все</option>
-                        {categories.map((category) => (
-                            <option key={category} value={category}>{category}</option>
-                        ))}
-                    </select>
+                    <div className={styles.selectContainer}>
+                        <select name="category" onChange={handleFilterChange} className={styles.selectButtons}>
+                            <option value="">Все</option>
+                            {categories.map((category) => (
+                                <option key={category} value={category}>{category}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
 
                 <div className={styles.filterSection}>
                     <h3>Бренды</h3>
-                    <select name="brand" onChange={handleFilterChange}>
+                    <select name="brand" onChange={handleFilterChange} className={styles.selectButtons}>
                         <option value="">Все</option>
                         {brands.map((brand) => (
                             <option key={brand} value={brand}>{brand}</option>
@@ -68,26 +94,7 @@ const ProductFilterModal = ({onFilterApply, categories, brands, minPrice, maxPri
 
                 <div className={styles.filterSection}>
                     <h3>Цена</h3>
-                    <input
-                        type="range"
-                        name="priceRange"
-                        min={minPrice}
-                        max={maxPrice}
-                        value={filter.priceRange}
-                        onChange={(e) =>
-                            setFilter({ ...filter, minPrice: e.target.value })
-                        }
-                    />
-                    <input
-                        type="range"
-                        name="priceRange"
-                        min={minPrice}
-                        max={maxPrice}
-                        value={filter.priceRange}
-                        onChange={(e) =>
-                            setFilter({ ...filter, maxPrice: e.target.value })
-                        }
-                    />
+                    <RangeSlider />
                     <div>
                         <span>от {filter.minPrice} т</span>
                         <span>до {filter.maxPrice} т</span>
@@ -96,7 +103,7 @@ const ProductFilterModal = ({onFilterApply, categories, brands, minPrice, maxPri
 
                 {characteristics.map((characteristic) => (
                     <div key={characteristic.name} className={styles.filterSection}>
-                         <h3>{characteristic.name}</h3>
+                        <h3>{characteristic.name}</h3>
                         {characteristic.values.map((value) => (
                             <label key={value}>
                                 <input
