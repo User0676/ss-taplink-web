@@ -84,8 +84,8 @@ const ProductDetailsModal = () => {
 
                 <div className={styles.reviewComponent}>
                     <StarIcon className={styles.reviewIcon}/>
-                    <p>{productData.AverageRating?.toFixed(2)} </p>
-                    <span className={styles.reviewNumComponent}>({productData.reviewsAmount} отзывов)</span>
+                    <p>{productData?.AverageRating?.toFixed(2)} </p>
+                    <span className={styles.reviewNumComponent}>({productData?.reviewsAmount} отзывов)</span>
                 </div>
 
                 <h2 className={styles.productName}>{selectedProduct.name}</h2>
@@ -114,7 +114,7 @@ const ProductDetailsModal = () => {
                         <div className={styles.reviewComponent2}>
                             <p>Оценка и Отзывы</p>
                             <StarIcon className={styles.reviewIcon}/>
-                            <p>{productData.AverageRating?.toFixed(2)} </p>
+                            <p>{productData?.AverageRating?.toFixed(2)} </p>
                             <span className={styles.reviewNumComponent}>({productData.reviewsAmount} отзывов)</span>
                         </div>
 
