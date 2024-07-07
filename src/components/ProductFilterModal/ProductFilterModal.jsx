@@ -6,6 +6,7 @@ import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
 import BoxedCheckbox from '../Checkbox/checkbox';
+import DualSlider from '../RangeSlider/RangeSlider';
 
 function valuetext(value) {
     return `${value}°C`;
@@ -23,7 +24,7 @@ function RangeSlider({ minPrice, maxPrice, onChange }) {
     };
 
     return (
-        <Box sx={{ width: 460 }}>
+        <Box sx={{ width: '100%' }}>
             <Slider
                 getAriaLabel={() => 'Price range'}
                 value={value}
@@ -120,7 +121,10 @@ const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPr
 
                 <div className={styles.filterSection}>
                     <h3>Цена</h3>
-                    <RangeSlider minPrice={filter.minPrice} maxPrice={filter.minPrice} onChange={handleFilterChange} />
+                    <div className={styles.sliderOnModal}>
+                        <RangeSlider minPrice={filter.minPrice} maxPrice={filter.minPrice}
+                                     onChange={handleFilterChange}/>
+                    </div>
                     <div>
                         <span>от {filter.minPrice?.toString()} т </span>
                         <span>до {filter.maxPrice?.toString()} т</span>
@@ -152,15 +156,16 @@ const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPr
                             <BoxedCheckbox
                                 value={value}
                                 onClick={(isChecked) => handleCharacteristicChange(
-                                                    characteristic.name,
-                                                    isChecked
-                                                        ? [...(filter.characteristics[characteristic.name] || []), value]
-                                                        : (filter.characteristics[characteristic.name] || []).filter((v) => v !== value)
-                                                )}
+                                    characteristic.name,
+                                    isChecked
+                                        ? [...(filter.characteristics[characteristic.name] || []), value]
+                                        : (filter.characteristics[characteristic.name] || []).filter((v) => v !== value)
+                                )}
                             />
                         ))}
                     </div>
                 ))}
+
 
                 <Button variant="contained" color="primary" onClick={handleApplyFilter}>
                     Показать товары

@@ -10,6 +10,7 @@
   transition: transform 0.3s ease-in-out;
   font-family: Inter, sans-serif;
   overflow-y: scroll;
+  width: 100%;
 }
 
 .selectButtons{
@@ -102,3 +103,11 @@
   background: #ddd;
   border-radius: 4px;
 }
+
+.sliderOnModal{
+  width:100%;
+}
+
+
+
+

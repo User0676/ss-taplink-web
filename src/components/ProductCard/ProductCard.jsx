@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
-        color: '#000',
+        color: '#121',
     },
     '& .MuiRating-iconHover': {
         color: '#000',
@@ -56,10 +56,10 @@ const ProductCard = ({ product }) => {
                 <p>{product.name}</p>
                 <p className= {styles.descriptionBlock}>{product.category}</p>
                 <div className={styles.price}>{formatNumber(product.price)} тг
-                    <div className={styles.rassrochkaContainer}>
+                    {/* <div className={styles.rassrochkaContainer}>
                     <p className={styles.rassrochkaPrice}>{formatNumber(parseInt(product.price / 12))} т</p>
                     <p className={styles.rassrochkaMonth}>х12</p>
-                    </div>
+                    </div>*/}
                 </div>
                 <div class="ks-widget"
                     data-template="button"
@@ -69,7 +69,7 @@ const ProductCard = ({ product }) => {
                     data-style="desktop"
                 ></div>
 
-                <script>{function(d, s, id) {
+                <div className={styles.kaspiButton}><script>{function(d, s, id) {
                         let js, kjs;
                         if (d.getElementById(id)) return;
                         js = d.createElement(s); js.id = id;
@@ -77,7 +77,7 @@ const ProductCard = ({ product }) => {
                         kjs = document.getElementsByTagName(s)[0]
                         kjs.parentNode.insertBefore(js, kjs);
                     }(document, 'script', 'KS-Widget')}
-                </script>
+                </script> </div>
                 {/*<Button
                     variant="contained"
                     color="primary"

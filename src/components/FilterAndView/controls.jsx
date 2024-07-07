@@ -11,6 +11,10 @@ import { CartContext } from '../../contexts/CartContext';
 const FilterSortControls = ({ onViewChange, onSortChange }) => {
     const { openFilterModal, openSortModal, sortType } = useContext(CartContext);
 
+    const closeSortModal = () => {
+
+    }
+
     return (
         <div className={styles.filterSortControls}>
             <ButtonGroup variant="outlined" aria-label="outlined button group" className={styles.sortAll}>
