@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: landing
+  name: ss-tap-web
 spec:
   selector:
     matchLabels:
-      app: landing
+      app: ss-tap-web
   replicas: 1
   template:
     metadata:
       labels:
-        app: landing
+        app: ss-tap-web
     spec:
       nodeSelector:
         doks.digitalocean.com/node-pool: pool-2
       containers:
-        - name: landing
+        - name: ss-tap-web
           image: {{image}}
       imagePullSecrets:
         - name: dockerhubkey
