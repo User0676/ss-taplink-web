@@ -12,7 +12,7 @@ import ProductFilterModal from '../../components/ProductFilterModal/ProductFilte
 import SortModal from '../../components/SortModal/SortModal';
 import { config } from '../../config';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 
 export const Home = () => {
@@ -23,6 +23,7 @@ export const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [filterIsLoading, setfilterIsLoading] = useState(false)
     const [merchantCode, setMerchantCode] = useState("")
+    const [searchParams, setSearchParams] = useSearchParams();
 
     //const [storeId, setStoreId] = useState("")
 
@@ -39,10 +40,11 @@ export const Home = () => {
         "category": "",
         "brand": "",
         "filters": [
-        ]
+        ],
+        "productsList": searchParams.get("products-list")?.split(" ") || []
     });
 
-    //console.log(id)
+    console.log(id)
 
     useEffect(() => {
         fetchStoreData(id)
