@@ -67,6 +67,13 @@ const ProductDetailsModal = () => {
 
         const visibleCharacteristics = showAllCharacteristics ? characteristics : characteristics.slice(0, 1);
 
+        // Function to calculate the number of dots
+        const calculateDots = (name, value) => {
+            const totalLength = 75; // Adjust this value as needed for your layout
+            const numberOfDots = totalLength - name.length;
+            return '.'.repeat(Math.max(numberOfDots, 0));
+        };
+
         return (
             <>
                 <div>
@@ -75,7 +82,13 @@ const ProductDetailsModal = () => {
                             <strong>{characteristic.name}</strong>
                             {characteristic.features.map((value, index) => (
                                 <div key={index}>
-                                    <p className={styles.CharacteristicText}><strong>{value.name}</strong>..................  {value.value}</p>
+                                    <p className={styles.CharacteristicText}>
+                                        <strong>{value.name}</strong>
+                                        <span style={{ whiteSpace: 'pre' }}>
+                                            {/*{calculateDots(value.name, value.value)}*/ } :  {value.value}
+                                        </span>
+                                        {/* {value.value}*/}
+                                    </p>
                                 </div>
                             ))}
                         </div>
@@ -88,7 +101,10 @@ const ProductDetailsModal = () => {
                 )}
             </>
         );
-    };
+
+
+
+};
 
     const renderReviews = (reviews) => {
         if (!reviews) {
