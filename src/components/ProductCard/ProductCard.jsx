@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styles from './ProductCard.module.scss';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -19,7 +19,7 @@ const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, merchant }) => {
     const { addToCart, openProductDetails } = useContext(CartContext);
 
     const handleAddToCart = (event) => {
@@ -41,6 +41,34 @@ const ProductCard = ({ product }) => {
         }
         return stars;
     };
+
+    const initButton = () => {
+        ((d, s, id) => {
+            let js, kjs;
+            if (d.getElementById(id)) {
+                //d.getElementById(id).remove()
+                console.log("element:", d.getElementById(id))
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://kaspi.kz/kaspibutton/widget/ks-wi_ext.js';
+                // kjs = document.getElementsByTagName(s)[0]
+                // kjs.parentNode.insertBefore(js, kjs);
+                //console.log(kjs)
+                return
+            };
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://kaspi.kz/kaspibutton/widget/ks-wi_ext.js';
+            kjs = document.getElementsByTagName(s)[0]
+            console.log("kjs", kjs)
+            kjs.parentNode.insertBefore(js, kjs);
+            console.log(kjs)
+        })(document, 'script', 'KS-Widget')
+    }
+
+    useEffect(() => {
+        //ksWidgetInitializer.reinit()
+        //initButton()
+    }, [merchant, product]);
+
     return (
 
         <div className={styles.productCard} onClick={handleOpenProductDetails}>
@@ -61,23 +89,15 @@ const ProductCard = ({ product }) => {
                     <p className={styles.rassrochkaMonth}>х12</p>
                     </div>*/}
                 </div>
-                <div class="ks-widget"
+                
+                <div className="ks-widget"
                     data-template="button"
                     data-merchant-sku={product.sku}
-                    data-merchant-code="1037016"
+                    data-merchant-code={merchant}
                     data-city="750000000"
-                    data-style="desktop"
+                    //style={{width: "200px", height: "auto"}}
                 ></div>
 
-                <div className={styles.kaspiButton}><script>{function(d, s, id) {
-                        let js, kjs;
-                        if (d.getElementById(id)) return;
-                        js = d.createElement(s); js.id = id;
-                        js.src = 'https://kaspi.kz/kaspibutton/widget/ks-wi_ext.js';
-                        kjs = document.getElementsByTagName(s)[0]
-                        kjs.parentNode.insertBefore(js, kjs);
-                    }(document, 'script', 'KS-Widget')}
-                </script> </div>
                 {/*<Button
                     variant="contained"
                     color="primary"

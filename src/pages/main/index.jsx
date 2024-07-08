@@ -21,6 +21,7 @@ export const Home = () => {
     const [id, setId] = useState(useParams().storeId)
     const [isLoading, setIsLoading] = useState(true);
     const [filterIsLoading, setfilterIsLoading] = useState(false)
+    const [merchantCode, setMerchantCode] = useState("")
 
     const [title, setTitle] = useState('');
 
@@ -86,6 +87,7 @@ export const Home = () => {
         axios.get(`${config.apiUrl}/store/${id}`).then((response) => {
             //console.log(response.data)
             setTitle(response.data[0].name)
+            setMerchantCode(response.data[0].storeId)
             //console.log(response.data[0].name)
         }).catch((error) => {
             console.log(error)
@@ -109,7 +111,7 @@ export const Home = () => {
                 <div className={styles.container}>
                     <SearchBar />
                     <FilterSortControls onSortChange={handleSortChange} onViewChange={handleViewChange} />
-                    <ProductGrid viewType={viewType} sortType={sortType} products={products.products} isLoading={isLoading}/>
+                    <ProductGrid viewType={viewType} sortType={sortType} products={products.products} isLoading={isLoading} merchant={merchantCode}/>
                 </div>
                 <CartModal />
                 <CartDetailsModal />

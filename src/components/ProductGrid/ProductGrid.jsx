@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './ProductGrid.module.scss';
 import ProductCard from '../ProductCard/ProductCard';
 import Loading from '../Loading/Loading';
@@ -99,7 +99,46 @@ const sortProducts = (products, sortType) => {
     }
 };
 
-const ProductGrid = ({ viewType, sortType, products, isLoading }) => {
+const ProductGrid = ({ viewType, sortType, products, isLoading, merchant }) => {
+    const initButton = () => {
+        ((d, s, id) => {
+            let js, kjs;
+            if (d.getElementById(id)) {
+                //console.log("element:", d.getElementById(id))
+                //js = d.createElement(s); js.id = id;
+                js = d.getElementById(id);
+                console.log("js: ", js)
+                js.remove()
+                //js.removeAttribute("id")
+                //js.removeAttribute("src")
+                //js.id = id;
+                //js.src = 
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://kaspi.kz/kaspibutton/widget/ks-wi_ext.js';
+                //js.id = id;
+                //js = d.getElementById(id);
+                kjs = document.getElementsByTagName(s)[0]
+                console.log(kjs)
+                console.log(js)
+                kjs.parentNode.insertBefore(js, kjs);
+                console.log(kjs)
+                
+                return
+            };
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://kaspi.kz/kaspibutton/widget/ks-wi_ext.js';
+            kjs = document.getElementsByTagName(s)[0]
+            console.log("kjs", kjs)
+            kjs.parentNode.insertBefore(js, kjs);
+            console.log(kjs)
+        })(document, 'script', 'KS-Widget')
+    }
+
+    useEffect(() => {
+        initButton()
+    }, [products])
+
+
     if (!products || isLoading) {
         return (
             <>
@@ -113,7 +152,7 @@ const ProductGrid = ({ viewType, sortType, products, isLoading }) => {
     return (
         <div className={viewType === 'grid' ? styles.productGrid : styles.productList}>
             {sortedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} merchant={merchant}/>
             ))}
         </div>
     );
