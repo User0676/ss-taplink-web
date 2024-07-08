@@ -1,11 +1,20 @@
 .searchBar {
   margin: 16px 0;
-  border-top-left-radius: 100%;
   flex: 1 1 100%;
+
 
 }
 
 .searchWithFilter{
   display: flex;
 
+}
+
+
+.filterButton{
+  margin: 16px;
+  padding: 8px 16px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid lightgray;
 }

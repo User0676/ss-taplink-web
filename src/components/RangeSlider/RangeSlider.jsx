@@ -6,7 +6,7 @@ function valuetext(value) {
     return `${value}°C`;
 }
 
-function RangeSlider({ minPrice, maxPrice, onChange }) {
+function RangeSlider2({ minPrice, maxPrice, onChange }) {
     const [value, setValue] = useState([minPrice, maxPrice]);
 
     useEffect(() => {
@@ -33,4 +33,4 @@ function RangeSlider({ minPrice, maxPrice, onChange }) {
     );
 }
 
-export default RangeSlider;
+export default RangeSlider2;

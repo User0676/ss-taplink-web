@@ -8,10 +8,10 @@ import { styled } from '@mui/material/styles';
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
-        color: '#121',
+        color: '#F9E076',
     },
     '& .MuiRating-iconHover': {
-        color: '#000',
+        color: '#F9E076',
     },
 });
 
@@ -53,7 +53,7 @@ const ProductCard = ({ product }) => {
                     <div className={styles.ratingBlock}><p>{product.reviews?.reviewsAmount || "Нет "}</p></div>
                 </div>
                 {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
-                <p>{product.name}</p>
+                <p className={styles.productName}>{product.name}</p>
                 <p className= {styles.descriptionBlock}>{product.category}</p>
                 <div className={styles.price}>{formatNumber(product.price)} тг
                     {/* <div className={styles.rassrochkaContainer}>

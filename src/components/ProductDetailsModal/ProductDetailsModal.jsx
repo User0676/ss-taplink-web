@@ -7,6 +7,17 @@ import StarIcon from '@mui/icons-material/Star';
 import axios from "axios";
 import { config } from "../../config";
 import Loading from '../Loading/Loading';
+import {styled} from "@mui/material/styles";
+import {Rating} from "@mui/material";
+
+const StyledRating = styled(Rating)({
+    '& .MuiRating-iconFilled': {
+        color: '#F9E076',
+    },
+    '& .MuiRating-iconHover': {
+        color: '#F9E076',
+    },
+});
 
 const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -94,7 +105,11 @@ const ProductDetailsModal = () => {
                             <div key={review.id} className={styles.review}>
                                 <div className={styles.mainRevInfo}>
                                     <p className={styles.reviewAuthor}><strong>{review.author}</strong></p>
-                                    <StarIcon className={styles.reviewIcon} />
+                                    <StyledRating
+                                        className={styles.reviewIcon}
+                                        value={review.rating}
+                                        readOnly
+                                    />
                                     <p className={styles.reviewDate}>{(new Date(review.date)).toLocaleDateString("en-US", {})}</p>
                                 </div>
                                 <p>{review.commentText}</p>
@@ -117,6 +132,8 @@ const ProductDetailsModal = () => {
         return null;
     }
 
+    const roundedRating = productData ? Math.round(productData.AverageRating) : 0;
+
     return (
         <div className={`${styles.productDetailsModal} ${selectedProduct ? styles.show : ''}`}>
             <div className={styles.modalContent}>
@@ -127,7 +144,11 @@ const ProductDetailsModal = () => {
                 )}
 
                 <div className={styles.reviewComponent}>
-                    <StarIcon className={styles.reviewIcon} />
+                    <StyledRating
+                        className={styles.reviewIcon}
+                        value={roundedRating}
+                        readOnly
+                    />
                     <p>{productData?.AverageRating?.toFixed(2)}</p>
                     <span className={styles.reviewNumComponent}>({productData?.reviewsAmount} отзывов)</span>
                 </div>
@@ -148,12 +169,16 @@ const ProductDetailsModal = () => {
                 {productData &&
                     <div className={styles.productDetails}>
                         <h2 className={styles.descriptionName}>Характеристики</h2>
-                       <div className={styles.characteristicsByOne}> {renderCharacteristics(productData.characteristics)}</div>
+                        <div className={styles.characteristicsByOne}> {renderCharacteristics(productData.characteristics)}</div>
 
                         <div className={styles.reviewComponents}>
                             <div className={styles.reviewComponent2}>
                                 <p>Оценка и Отзывы</p>
-                                <StarIcon className={styles.reviewIcon} />
+                                <StyledRating
+                                    className={styles.reviewIcon}
+                                    value={roundedRating}
+                                    readOnly
+                                />
                                 <p>{productData?.AverageRating?.toFixed(2)}</p>
                                 <span className={styles.reviewNumComponent}>({productData.reviewsAmount} отзывов)</span>
                             </div>
@@ -167,4 +192,3 @@ const ProductDetailsModal = () => {
 };
 
 export default ProductDetailsModal;
-;

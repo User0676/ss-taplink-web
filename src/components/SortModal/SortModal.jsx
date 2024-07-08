@@ -24,7 +24,7 @@ const SortModal = ({ onSortChange }) => {
                                 <span className={styles.radioText}>Популярные</span>
                                 <input
                                     type="radio"
-                                    value="popularity"
+                                    value="Популярные"
                                     checked={sortType === "popularity"}
                                     onChange={(e) => onChange(e.target.value)}
                                     className={styles.radioInput}
@@ -35,7 +35,7 @@ const SortModal = ({ onSortChange }) => {
                                 <span className={styles.radioText}>Новинки</span>
                                 <input
                                     type="radio"
-                                    value="new"
+                                    value="Новинки"
                                     checked={sortType === "new"}
                                     onChange={(e) => onChange(e.target.value)}
                                     className={styles.radioInput}
@@ -45,7 +45,7 @@ const SortModal = ({ onSortChange }) => {
                                 <span className={styles.radioText}>Сначала дешевые</span>
                                 <input
                                     type="radio"
-                                    value="price"
+                                    value="Сначала дешевые"
                                     checked={sortType === "price"}
                                     onChange={(e) => onChange(e.target.value)}
                                     className={styles.radioInput}
@@ -57,7 +57,7 @@ const SortModal = ({ onSortChange }) => {
                                 <span className={styles.radioText}>Сначала дорогие</span>
                                 <input
                                     type="radio"
-                                    value="price-desc"
+                                    value="Сначала дорогие"
                                     checked={sortType === "price-desc"}
                                     onChange={(e) => onChange(e.target.value)}
                                     className={styles.radioInput}
@@ -68,7 +68,7 @@ const SortModal = ({ onSortChange }) => {
                                 <span className={styles.radioText}>Высокий рейтинг</span>
                                 <input
                                     type="radio"
-                                    value="rating"
+                                    value="Высокий рейтинг"
                                     checked={sortType === "rating"}
                                     onChange={(e) => onChange(e.target.value)}
                                     className={styles.radioInput}

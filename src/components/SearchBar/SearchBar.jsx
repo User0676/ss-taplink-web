@@ -1,9 +1,24 @@
 import React, { useContext, useState } from 'react';
 import styles from './SearchBar.module.scss';
-import { TextField } from '@mui/material';
-import Button from "@mui/material/Button";
-import FilterListIcon from "@mui/icons-material/Tune";
-import { CartContext } from "../../contexts/CartContext";
+import { TextField, Button } from '@mui/material';
+import FilterListIcon from '@mui/icons-material/Tune';
+import { CartContext } from '../../contexts/CartContext';
+import { styled } from '@mui/material/styles';
+
+const GreenBorderTextField = styled(TextField)({
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderRadius: '16px',
+            borderColor: 'lightgray'
+        },
+        '&:hover fieldset': {
+            borderColor: 'green',
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: 'green',
+        },
+    },
+});
 
 const SearchBar = () => {
     const { openFilterModal } = useContext(CartContext);
@@ -24,7 +39,7 @@ const SearchBar = () => {
     return (
         <div className={styles.searchWithFilter}>
             <div className={styles.searchBar}>
-                <TextField
+                <GreenBorderTextField
                     fullWidth
                     placeholder="Поиск в магазине"
                     value={searchQuery}
@@ -32,7 +47,7 @@ const SearchBar = () => {
                     onKeyPress={handleKeyPress} // добавляем обработчик нажатия клавиши
                 />
             </div>
-            <Button onClick={openFilterModal}><FilterListIcon /></Button>
+            <button className={styles.filterButton} onClick={openFilterModal}><FilterListIcon className="FLIcon" /></button>
         </div>
     );
 };

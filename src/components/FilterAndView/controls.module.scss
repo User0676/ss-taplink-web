@@ -8,11 +8,20 @@
 .sortAll{
   display:block;
   width: 100%;
+
 }
+
+.radioText
 
 .sortFull{
   display:flex;
   min-width: auto;
   width: 100%;
+  border: 1px solid blue;
+  border-radius: 13px;
+}
 
+.sortAll .MuiButtonGroup-grouped {
+  min-width: 40px;
+  border-radius: 13px;
 }
