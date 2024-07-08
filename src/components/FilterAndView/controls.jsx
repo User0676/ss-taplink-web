@@ -11,9 +11,15 @@ import { styled } from '@mui/material/styles';
 const CustomButtonGroup = styled(ButtonGroup)({
     '.MuiButtonGroup-grouped': {
         minWidth: '40px',
-        borderRadius: '13px',
-        borderColor:'lightgray',
-
+        width: '100%',
+        color: 'black',
+        borderColor: 'lightgrey'
+    },
+    '&:hover fieldset': {
+        borderColor: 'lightgray',
+    },
+    '&.Mui-focused fieldset': {
+        borderColor: 'grey',
     },
 });
 

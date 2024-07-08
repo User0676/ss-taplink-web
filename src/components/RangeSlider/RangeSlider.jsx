@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 
 function valuetext(value) {
-    return `${value}°C`;
+    return `${value}₸`;
 }
 
 function RangeSlider2({ minPrice, maxPrice, onChange }) {
@@ -15,7 +15,7 @@ function RangeSlider2({ minPrice, maxPrice, onChange }) {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        onChange(newValue);
+        onChange(newValue); // Pass the updated values to the parent component
     };
 
     return (
@@ -27,7 +27,7 @@ function RangeSlider2({ minPrice, maxPrice, onChange }) {
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
                 min={minPrice}
-                max={maxPrice}
+                max={maxPrice} // Adjust according to your requirements
             />
         </Box>
     );

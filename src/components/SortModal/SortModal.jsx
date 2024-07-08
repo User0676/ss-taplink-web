@@ -19,28 +19,28 @@ const SortModal = ({ onSortChange }) => {
                     <fieldset className={styles.fieldset}>
                         <legend className={styles.legend}>Сортировка</legend>
                         <div className={styles.radioGroup}>
-                            <label
-                                className={`${styles.radioLabel} ${sortType === "popularity" ? styles.selected : ''}`}>
-                                <span className={styles.radioText}>Популярные</span>
-                                <input
-                                    type="radio"
-                                    value="Популярные"
-                                    checked={sortType === "popularity"}
-                                    onChange={(e) => onChange(e.target.value)}
-                                    className={styles.radioInput}
-                                />
-                            </label>
-                            <label className={`${styles.radioLabel} ${sortType === "new" ? styles.selected : ''}`}>
+                            {/*<label*/}
+                            {/*    className={`${styles.radioLabel} ${sortType === "popularity" ? styles.selected : ''}`}>*/}
+                            {/*    <span className={styles.radioText}>Популярные</span>*/}
+                            {/*    <input*/}
+                            {/*        type="radio"*/}
+                            {/*        value="Популярные"*/}
+                            {/*        checked={sortType === "popularity"}*/}
+                            {/*        onChange={(e) => onChange(e.target.value)}*/}
+                            {/*        className={styles.radioInput}*/}
+                            {/*    />*/}
+                            {/*</label>*/}
+                            {/*<label className={`${styles.radioLabel} ${sortType === "new" ? styles.selected : ''}`}>*/}
 
-                                <span className={styles.radioText}>Новинки</span>
-                                <input
-                                    type="radio"
-                                    value="Новинки"
-                                    checked={sortType === "new"}
-                                    onChange={(e) => onChange(e.target.value)}
-                                    className={styles.radioInput}
-                                />
-                            </label>
+                            {/*    <span className={styles.radioText}>Новинки</span>*/}
+                            {/*    <input*/}
+                            {/*        type="radio"*/}
+                            {/*        value="Новинки"*/}
+                            {/*        checked={sortType === "new"}*/}
+                            {/*        onChange={(e) => onChange(e.target.value)}*/}
+                            {/*        className={styles.radioInput}*/}
+                            {/*    />*/}
+                            {/*</label>*/}
                             <label className={`${styles.radioLabel} ${sortType === "price" ? styles.selected : ''}`}>
                                 <span className={styles.radioText}>Сначала дешевые</span>
                                 <input

@@ -10,12 +10,13 @@ const GreenBorderTextField = styled(TextField)({
         '& fieldset': {
             borderRadius: '16px',
             borderColor: 'lightgray'
+
         },
         '&:hover fieldset': {
-            borderColor: 'green',
+            borderColor: 'lightgray',
         },
         '&.Mui-focused fieldset': {
-            borderColor: 'green',
+            borderColor: 'grey',
         },
     },
 });
