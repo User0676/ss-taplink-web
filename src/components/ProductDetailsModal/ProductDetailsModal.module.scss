@@ -120,11 +120,13 @@
 }
 
 .descriptionName{
-  background-color: lightgrey;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
   padding: 5px 5px;
+  background-color:whitesmoke;
+  border-radius: 5%;
   font-weight: normal;
-  font-family:Inter, sans-serif;
 
 }
 
@@ -172,3 +174,18 @@
   left: 0;
 }
 
+.showMoreLink {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.characteristicsByOne{
+  font-size:2vh;
+}
+
+.reviewsByOne{
+  font-size:2vh;
+}

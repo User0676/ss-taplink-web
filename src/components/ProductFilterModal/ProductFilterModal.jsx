@@ -6,8 +6,6 @@ import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
 import BoxedCheckbox from '../Checkbox/checkbox';
-import DualSlider from '../RangeSlider/RangeSlider';
-
 function valuetext(value) {
     return `${value}°C`;
 }
