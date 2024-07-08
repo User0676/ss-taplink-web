@@ -19,7 +19,7 @@ const App = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/:storeId" element={
+                <Route path="/:storeSlug" element={
                     <Home />
                 } />
             </Routes>

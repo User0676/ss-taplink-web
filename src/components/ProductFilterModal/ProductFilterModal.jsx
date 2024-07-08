@@ -6,7 +6,7 @@ import Loading from '../Loading/Loading';
 import BoxedCheckbox from '../Checkbox/checkbox';
 import RangeSlider2 from '../RangeSlider/RangeSlider';
 
-const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPrice, characteristics, onChange, isLoading }) => {
+const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPrice, characteristics, isLoading }) => {
     const { isFilterModalOpen, closeFilterModal } = useContext(CartContext);
     const [filter, setFilter] = useState({
         category: '',
@@ -20,9 +20,9 @@ const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPr
         setFilter((prevFilter) => ({ ...prevFilter, minPrice, maxPrice }));
     }, [minPrice, maxPrice]);
 
-    useEffect(() => {
-        onChange(filter);
-    }, [filter]);
+    // useEffect(() => {
+    //     onChange(filter);
+    // }, [filter]);
 
     const handleFilterChange = (e) => {
         const { name, value } = e.target;

@@ -18,10 +18,13 @@ import { useParams } from 'react-router-dom';
 export const Home = () => {
     const [sortType, setSortType] = useState('');
     const [viewType, setViewType] = useState('grid');
-    const [id, setId] = useState(useParams().storeId)
+    const [id, setId] = useState("")
+    const [slug, setSlug] = useState(useParams().storeSlug)
     const [isLoading, setIsLoading] = useState(true);
     const [filterIsLoading, setfilterIsLoading] = useState(false)
     const [merchantCode, setMerchantCode] = useState("")
+
+    //const [storeId, setStoreId] = useState("")
 
     const [title, setTitle] = useState('');
 
@@ -43,11 +46,11 @@ export const Home = () => {
 
     useEffect(() => {
         fetchStoreData(id)
-    })
+    }, [slug])
 
     useEffect(() => {
         fetchProducts()
-    }, [body])
+    }, [body, id])
 
     const onFilterApply = (filter) => {
         setBody({
@@ -59,6 +62,7 @@ export const Home = () => {
     };
 
     const fetchProducts = () => {
+        console.log(id)
         console.log(body)
         setIsLoading(true)
         axios.post(`${config.apiUrl}/products/${id}`, body).then((response) => {
@@ -71,24 +75,26 @@ export const Home = () => {
         })
     }
 
-    const fetchFilters = (filter) => {
-        console.log({...body, ...filter})
-        setfilterIsLoading(true)
-        axios.post(`${config.apiUrl}/filter-preview/${id}`, {...body, ...filter}).then((response) => {
-            console.log(response.data)
-            setProducts({...products, filter: response.data})
-            console.log(products)
-        }).catch((error) => {
-            console.log(error)
-        }).finally(() => setfilterIsLoading(false))
-    }
+    // const fetchFilters = (filter) => {
+    //     console.log({...body, ...filter})
+    //     setfilterIsLoading(true)
+    //     axios.post(`${config.apiUrl}/filter-preview/${id}`, {...body, ...filter}).then((response) => {
+    //         console.log(response.data)
+    //         setProducts({...products, filter: response.data})
+    //         console.log(products)
+    //     }).catch((error) => {
+    //         console.log(error)
+    //     }).finally(() => setfilterIsLoading(false))
+    // }
 
     const fetchStoreData = (id) => {
-        axios.get(`${config.apiUrl}/store/${id}`).then((response) => {
+        axios.get(`${config.apiUrl}/store/${slug}`).then((response) => {
             //console.log(response.data)
-            setTitle(response.data[0].name)
-            setMerchantCode(response.data[0].storeId)
-            //console.log(response.data[0].name)
+            setTitle(response.data.name)
+            setMerchantCode(response.data.storeId)
+            setId(response.data._id)
+            console.log(response.data)
+            console.log(id)
         }).catch((error) => {
             console.log(error)
         })
@@ -159,7 +165,7 @@ export const Home = () => {
                     minPrice={products.filter?.minPrice}
                     maxPrice={products.filter?.maxPrice}
                     characteristics={products.filter?.availableFilters}
-                    onChange={fetchFilters}
+                    //onChange={fetchFilters}
                     isLoading={filterIsLoading}
                 />
                 <SortModal onSortChange={handleSortChange} />
