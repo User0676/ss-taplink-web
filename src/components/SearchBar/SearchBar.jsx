@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 const GreenBorderTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderRadius: '16px',
+            //borderRadius: '16px',
             borderColor: 'lightgray'
 
         },

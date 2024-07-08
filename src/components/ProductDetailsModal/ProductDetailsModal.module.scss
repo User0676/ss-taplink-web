@@ -29,6 +29,7 @@
   overflow-y: auto; /* Enable vertical scrolling */
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 }
 
 .closeButton {
@@ -44,7 +45,7 @@
 .productImage {
   align-content: center;
   max-width: 60%;
-  margin-top: 30%;
+  margin-top: 20%;
   height: auto;
   top:72px;
   gap:25px;
@@ -81,6 +82,7 @@
   align-items: center;
   margin-bottom: 8px;
   padding: 5px 5px;
+  margin-top: 45px;
 }
 .reviewComponent2 {
   display: flex;
@@ -89,6 +91,7 @@
   padding: 5px 5px;
   background-color:whitesmoke;
   border-radius: 5%;
+  justify-content: space-between;
 }
 
 .reviewIcon {
@@ -176,9 +179,8 @@
 }
 
 .showMoreLink {
-  color: blue;
+  color: #0089d0;
   cursor: pointer;
-  text-decoration: underline;
   margin-top: 8px;
   display: inline-block;
 }
@@ -189,4 +191,11 @@
 
 .reviewsByOne{
   font-size:2vh;
+}
+.reviewText{
+  line-height: 1.9lh;
+}
+
+.CharacteristicText{
+  line-height: 1.9lh;
 }

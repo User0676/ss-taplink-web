@@ -75,7 +75,7 @@ const ProductDetailsModal = () => {
                             <strong>{characteristic.name}</strong>
                             {characteristic.features.map((value, index) => (
                                 <div key={index}>
-                                    <p><strong>{value.name}:</strong> {value.value}</p>
+                                    <p className={styles.CharacteristicText}><strong>{value.name}</strong>..................  {value.value}</p>
                                 </div>
                             ))}
                         </div>
@@ -112,7 +112,7 @@ const ProductDetailsModal = () => {
                                     />
                                     <p className={styles.reviewDate}>{(new Date(review.date)).toLocaleDateString("en-US", {})}</p>
                                 </div>
-                                <p>{review.commentText}</p>
+                                <p className={styles.reviewText}>{review.commentText}</p>
                             </div>
                         ))
                     ) : (

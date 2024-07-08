@@ -65,13 +65,13 @@ const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPr
         <div className={`${styles.productFilterModal} ${isFilterModalOpen ? styles.show : ''}`}>
             <div className={styles.modalContent}>
                 <button className={styles.closeButton} onClick={closeFilterModal}>✕</button>
-                <h2>Фильтр</h2>
+                <h2 className={styles.FilterTag}>Фильтр</h2>
 
                 <div className={styles.filterSection}>
                     <h3>Категории</h3>
                     <div className={styles.selectContainer}>
                         <select name="category" onChange={handleFilterChange} className={styles.selectButtons}>
-                            <option value="">Все</option>
+                            <option value="" className={styles.CategoryName}>Все</option>
                             {categories.map((category) => (
                                 <option key={category} value={category}>{category}</option>
                             ))}
@@ -120,9 +120,8 @@ const ProductFilterModal = ({ onFilterApply, categories, brands, minPrice, maxPr
                 {/*    </div>*/}
                 {/*))}*/}
 
-                <Button variant="contained" color="primary" onClick={handleApplyFilter}>
-                    Показать товары
-                </Button>
+
+                <button className={styles.ButtonMy}>Показать товары</button>
             </div>
         </div>
     );

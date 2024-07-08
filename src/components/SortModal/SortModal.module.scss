@@ -50,7 +50,7 @@
 .legend {
   font-size: 2.2em;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 15%;
 }
 
 .radioGroup {
@@ -71,6 +71,7 @@
   transition: background-color 0.3s ease-in-out;
   font-weight: 300;
   font-size: 20px;
+  margin-bottom: 20px;
 }
 
 .radioLabel.selected {
@@ -88,6 +89,7 @@
 .radioText {
   flex-grow: 1;
   text-align: left;
+  font-size: 30px;
 }
 
 .blurBackground {

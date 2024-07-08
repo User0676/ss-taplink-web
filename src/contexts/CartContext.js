@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
     const [isSortModalOpen, setIsSortModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [sortType, setSortType] = useState('Популярные'); // Add initial sort type
+    const [sortType, setSortType] = useState('Самые дешевые'); // Add initial sort type
 
 
     const addToCart = (product) => {
