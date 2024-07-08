@@ -95,13 +95,49 @@ export const Home = () => {
     }
 
     const handleSortChange = (sortType) => {
-        console.log(`Filtering by ${sortType} sort...`);
-        setBody({...body, sortBy: sortType})
+        console.log(`Sorting by ${sortType}...`);
+        switch (sortType) {
+            case "Популярные":
+                setBody({...body, sortBy: "popularity", sortDirection: "desc"})
+                break;
+            case "Новинки":
+                setBody({...body, sortBy: "new", sortDirection: "desc"})
+                break;
+            case "Сначала дешевые":
+                setBody({...body, sortBy: "price", sortDirection: "asc"})
+                break;
+            case "Сначала дорогие":
+                setBody({...body, sortBy: "price", sortDirection: "desc"})
+                break;
+            case "Высокий рейтинг":
+                setBody({...body, sortBy: "rating", sortDirection: "desc"})
+                break;
+            default:
+                setBody({...body, sortBy: "new", sortDirection: "desc"})
+        }
+        //setBody({...body, sortBy: sortType})
     };
 
     const handleViewChange = (viewType) => {
         setViewType(viewType);
     };
+
+    const handleSearchSubmit = (query) => {
+        setBody({...body, query: query});
+
+    };
+
+    // window.onerror = function (message, source, lineno, colno, error) {
+    //     // Log the error details or send them to a logging service
+    //     console.error('Error:', message);
+    //     console.error('Source:', source);
+    //     console.error('Line Number:', lineno);
+    //     console.error('Column Number:', colno);
+    //     console.error('Error Object:', error);
+      
+    //     // Return true to prevent the default browser error handling
+    //     return true;
+    //   };
 
     return (
         <>
@@ -109,7 +145,7 @@ export const Home = () => {
             <div className={styles.app}>
                 <Header title={title}/>
                 <div className={styles.container}>
-                    <SearchBar />
+                    <SearchBar onSubmit={handleSearchSubmit} />
                     <FilterSortControls onSortChange={handleSortChange} onViewChange={handleViewChange} />
                     <ProductGrid viewType={viewType} sortType={sortType} products={products.products} isLoading={isLoading} merchant={merchantCode}/>
                 </div>

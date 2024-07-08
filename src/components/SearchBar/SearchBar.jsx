@@ -20,7 +20,7 @@ const GreenBorderTextField = styled(TextField)({
     },
 });
 
-const SearchBar = () => {
+const SearchBar = ({onSubmit}) => {
     const { openFilterModal } = useContext(CartContext);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -32,6 +32,7 @@ const SearchBar = () => {
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
+            onSubmit(searchQuery);
             console.log('Enter pressed:', searchQuery); // отправляем значение при нажатии Enter
         }
     };

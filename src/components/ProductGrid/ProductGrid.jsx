@@ -117,6 +117,7 @@ const ProductGrid = ({ viewType, sortType, products, isLoading, merchant }) => {
                 js.src = 'https://kaspi.kz/kaspibutton/widget/ks-wi_ext.js';
                 //js.id = id;
                 //js = d.getElementById(id);
+                
                 kjs = document.getElementsByTagName(s)[0]
                 console.log(kjs)
                 console.log(js)
