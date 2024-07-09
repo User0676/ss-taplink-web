@@ -35,7 +35,7 @@ export const Home = () => {
 
     const [body, setBody] = useState({
         "page": 1,
-        "limit": 100,
+        "limit": 1000,
         "sortBy": "price",
         "sortDirection": "asc",
         "query": "",
@@ -155,7 +155,7 @@ export const Home = () => {
                     <FilterSortControls onSortChange={handleSortChange} onViewChange={handleViewChange} />
                 </div>
                 <ProductGrid viewType={viewType} sortType={sortType} products={products.products} productsToShowCount={productsToShowCount} isLoading={isLoading} merchant={merchantCode} cityId={"750000000"}/>
-                <ShowMoreButton onClick={showMore} isShow={productsToShowCount < products.products.length} />
+                <ShowMoreButton onClick={showMore} isShow={!isLoading && productsToShowCount < products.products?.length} />
                 <CartModal />
                 <CartDetailsModal />
                 <ProductDetailsModal />
