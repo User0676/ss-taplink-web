@@ -14,6 +14,7 @@ import SortModal from './components/SortModal/SortModal';
 import { Home } from './pages/main';
 import axios from 'axios';
 import {config} from './config';
+import './safeArea.scss'
 
 const App = () => {
     return (
