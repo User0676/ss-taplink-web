@@ -33,6 +33,7 @@
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  overflow-x: hidden;
 }
 
 .closeButton {
@@ -58,7 +59,8 @@
 .productName{
   //position: relative;
   margin-top: 15%;
-  right:6%
+  right:6%;
+  align-items:normal;
 }
 
 
