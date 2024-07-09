@@ -19,6 +19,13 @@ const StyledRating = styled(Rating)({
     },
 });
 
+
+const booleanCheck = (boolVal) =>{
+    if(boolVal[0] === 'false') { return 'нет'}
+    else if(boolVal[0] === 'true'){ return 'да'}
+    return boolVal
+}
+
 const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
@@ -65,6 +72,7 @@ const ProductDetailsModal = () => {
             return null;
         }
 
+
         const visibleCharacteristics = showAllCharacteristics ? characteristics : characteristics.slice(0, 1);
 
         // Function to calculate the number of dots
@@ -84,10 +92,7 @@ const ProductDetailsModal = () => {
                                 <div key={index}>
                                     <p className={styles.CharacteristicText}>
                                         <strong>{value.name}</strong>
-                                        <span style={{ whiteSpace: 'pre' }}>
-                                            {/*{calculateDots(value.name, value.value)}*/ } :  {value.value}
-                                        </span>
-                                        {/* {value.value}*/}
+                                            {/*{calculateDots(value.name, value.value)}*/ } :  {booleanCheck(value.value)}
                                     </p>
                                 </div>
                             ))}
