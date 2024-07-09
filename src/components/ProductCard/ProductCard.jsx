@@ -15,6 +15,21 @@ const StyledRating = styled(Rating)({
     },
 });
 
+const truncateText = (text, maxLines) => {
+    const lines = text.split('\n').slice(0, maxLines);
+    return lines.join('\n') + (lines.length === maxLines ? '...' : '');
+};
+
+const LimitedText = ({ text, maxLines }) => {
+    const truncatedText = truncateText(text, maxLines);
+
+    return (
+        <div style={{ whiteSpace: 'pre-line' }}>
+            {truncatedText}
+        </div>
+    );
+};
+
 const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
@@ -81,7 +96,7 @@ const ProductCard = ({ product, merchant }) => {
                     <div className={styles.ratingBlock}><p>{product.reviews?.reviewsAmount || "Нет "}</p></div>
                 </div>
                 {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
-                <p className={styles.productName}>{product.name}</p>
+                <p className={styles.productName}> <LimitedText text={product.name} maxLines={2} /></p>
                 <p className= {styles.descriptionBlock}>{product.category}</p>
                 <div className={styles.price}>{formatNumber(product.price)} тг
                     {/* <div className={styles.rassrochkaContainer}>

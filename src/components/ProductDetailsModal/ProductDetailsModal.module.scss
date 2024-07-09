@@ -12,9 +12,12 @@
   transform: translateY(-100%);
   transition: visibility 0.3s, transform 0.3s;
 
+  overflow-x: hidden;
+
   &.show {
     visibility: visible;
     transform: translateY(0);
+    overflow-x: hidden;
   }
 }
 
