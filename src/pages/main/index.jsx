@@ -13,6 +13,7 @@ import SortModal from '../../components/SortModal/SortModal';
 import { config } from '../../config';
 import axios from 'axios';
 import { useParams, useSearchParams } from 'react-router-dom';
+import ShowMoreButton from '../../components/ShowMoreButton/showMoreButton';
 
 
 export const Home = () => {
@@ -24,6 +25,7 @@ export const Home = () => {
     const [filterIsLoading, setfilterIsLoading] = useState(false)
     const [merchantCode, setMerchantCode] = useState("")
     const [searchParams, setSearchParams] = useSearchParams();
+    const [productsToShowCount, setProductsToShowCount] = useState(10)
 
     //const [storeId, setStoreId] = useState("")
 
@@ -33,9 +35,9 @@ export const Home = () => {
 
     const [body, setBody] = useState({
         "page": 1,
-        "limit": 10,
-        "sortBy": "new",
-        "sortDirection": "desc",
+        "limit": 100,
+        "sortBy": "price",
+        "sortDirection": "asc",
         "query": "",
         "category": "",
         "brand": "",
@@ -61,6 +63,7 @@ export const Home = () => {
             category: filter.category,
             filters: Object.entries(filter.characteristics).map(([name, values]) => ({name, values}))
         })
+        setProductsToShowCount(10)
     };
 
     const fetchProducts = () => {
@@ -123,6 +126,7 @@ export const Home = () => {
             default:
                 setBody({...body, sortBy: "new", sortDirection: "desc"})
         }
+        setProductsToShowCount(10)
         //setBody({...body, sortBy: sortType})
     };
 
@@ -132,20 +136,13 @@ export const Home = () => {
 
     const handleSearchSubmit = (query) => {
         setBody({...body, query: query});
+        setProductsToShowCount(10)
 
     };
 
-    // window.onerror = function (message, source, lineno, colno, error) {
-    //     // Log the error details or send them to a logging service
-    //     console.error('Error:', message);
-    //     console.error('Source:', source);
-    //     console.error('Line Number:', lineno);
-    //     console.error('Column Number:', colno);
-    //     console.error('Error Object:', error);
-
-    //     // Return true to prevent the default browser error handling
-    //     return true;
-    //   };
+    const showMore = () => {
+        setProductsToShowCount(productsToShowCount + 10)
+    }
 
     return (
         <>
@@ -156,9 +153,9 @@ export const Home = () => {
                     <Header title={title}/>
                     <SearchBar onSubmit={handleSearchSubmit} />
                     <FilterSortControls onSortChange={handleSortChange} onViewChange={handleViewChange} />
-
                 </div>
-                <ProductGrid viewType={viewType} sortType={sortType} products={products.products} isLoading={isLoading} merchant={merchantCode}/>
+                <ProductGrid viewType={viewType} sortType={sortType} products={products.products} productsToShowCount={productsToShowCount} isLoading={isLoading} merchant={merchantCode} cityId={"750000000"}/>
+                <ShowMoreButton onClick={showMore} isShow={productsToShowCount < products.products.length} />
                 <CartModal />
                 <CartDetailsModal />
                 <ProductDetailsModal />

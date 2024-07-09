@@ -1,10 +1,34 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import styles from './ProductCard.module.scss';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { CartContext } from '../../contexts/CartContext';
 import {Rating} from '@mui/material'
 import { styled } from '@mui/material/styles';
+import axios from 'axios';
+import Loading from '../Loading/Loading';
+
+export function useInterval(callback, delay) { 
+    // Creating a ref  
+    const savedCallback = useRef(); 
+  
+    // To remember the latest callback . 
+    useEffect(() => { 
+        savedCallback.current = callback; 
+    }, [callback]); 
+  
+    // combining the setInterval and  
+    //clearInterval methods based on delay. 
+    useEffect(() => { 
+        function func() { 
+            savedCallback.current(); 
+        } 
+        if (delay !== null) { 
+            let id = setInterval(func, delay); 
+            return () => clearInterval(id); 
+        } 
+    }, [delay]); 
+}
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
@@ -34,8 +58,37 @@ const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
 
-const ProductCard = ({ product, merchant }) => {
+const ProductCard = ({ product, merchant, cityId }) => {
     const { addToCart, openProductDetails } = useContext(CartContext);
+    const [isFetching, setIsFetching] = useState(true)
+
+    useInterval(() => {
+        const children = document.querySelector(`div [data-merchant-sku="${product.sku}"]`)?.children
+        if (children?.length) {
+            setIsFetching(false)
+            document.querySelector(`div [data-merchant-sku="${product.sku}"]`).className = ""
+        }
+        //console.log(children)
+        //setIsFetching(false)
+    }, isFetching ? 1000 : null)
+
+    // useEffect(async () => {
+    //     await getProductExist()
+    // }, [product])
+
+    // const getProductExist = async () => {
+    //     const referer = `https://kaspi.kz/shop/kaspibutton/frame/?template=button&merchantSku=${product.sku}&merchantCode=${merchant}&city=${cityId}&id=ks-lyecdbu5&url=${window.location.href}&pt=React%20App`
+    //     //const url = "https://kaspi.kz/shop/kaspibutton/frame/?template=button&merchantSku=%D0%A0%D0%9F2035&merchantCode=6866009&city=750000000&id=ks-lyecsbsv&url=http%3A%2F%2Flocalhost%3A3000%2Ftupperware-best%2F&pt=React%20App"
+    //     const url = "https://kaspi.kz/kaspibutton/static/blocks/button/button_ext.js"
+    //     const response = await axios.get(url, {headers: {
+    //         "Referer": referer
+    //     },}).catch((err) => {
+    //         console.log(err)
+    //     })
+    //     console.log(response)
+    // }
+
+
 
     const handleAddToCart = (event) => {
         event.stopPropagation();
@@ -46,83 +99,48 @@ const ProductCard = ({ product, merchant }) => {
         openProductDetails(product);
     };
 
-    const renderStars = (rating) => {
-        const maxRating = 5;
-        const stars = [];
-        for (let i = 0; i < maxRating; i++) {
-            stars.push(
-                <span key={i} className={`star ${i < rating ? 'filled' : ''}`}>&#9733;</span>
-            );
-        }
-        return stars;
-    };
-
-    const initButton = () => {
-        ((d, s, id) => {
-            let js, kjs;
-            if (d.getElementById(id)) {
-                //d.getElementById(id).remove()
-                console.log("element:", d.getElementById(id))
-                js = d.createElement(s); js.id = id;
-                js.src = 'https://kaspi.kz/kaspibutton/widget/ks-wi_ext.js';
-                // kjs = document.getElementsByTagName(s)[0]
-                // kjs.parentNode.insertBefore(js, kjs);
-                //console.log(kjs)
-                return
-            };
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://kaspi.kz/kaspibutton/widget/ks-wi_ext.js';
-            kjs = document.getElementsByTagName(s)[0]
-            console.log("kjs", kjs)
-            kjs.parentNode.insertBefore(js, kjs);
-            console.log(kjs)
-        })(document, 'script', 'KS-Widget')
-    }
-
-    useEffect(() => {
-        //ksWidgetInitializer.reinit()
-        //initButton()
-    }, [merchant, product]);
-
     return (
 
-        <div className={styles.productCard} onClick={handleOpenProductDetails}>
+        <>
+            {isFetching && <Loading/>}
+            <div className={styles.productCard} onClick={handleOpenProductDetails} style={{display: isFetching ? "none" : "block"}}>
+                <div className={styles.imageFormat}><img src={product.img} alt={product.name} className={styles.productImage} /></div>
+                <div className={styles.productDetails}>
+                    <div className={styles.ratingPlace}>
+                        <div className={styles.ratingBlock}><StyledRating name="read-only" value={product.reviews?.rating || 0}
+                                                                readOnly/></div>
+                        <div className={styles.ratingBlock}><p>{product.reviews?.reviewsAmount || "Нет "}</p></div>
+                    </div>
+                    {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
+                    <p className={styles.productName}> <LimitedText text={product.name} maxLines={2} /></p>
+                    <p className= {styles.descriptionBlock}>{product.category}</p>
+                    <div className={styles.price}>{formatNumber(product.price)} тг
+                        {/* <div className={styles.rassrochkaContainer}>
+                        <p className={styles.rassrochkaPrice}>{formatNumber(parseInt(product.price / 12))} т</p>
+                        <p className={styles.rassrochkaMonth}>х12</p>
+                        </div>*/}
+                    </div>
+                    
+                    <div className="ks-widget"
+                        data-template="button"
+                        data-merchant-sku={product.sku}
+                        data-merchant-code={merchant}
+                        data-city="750000000"
+                        
+                        //style={{width: "200px", height: "auto"}}
+                    ></div>
 
-            <div className={styles.imageFormat}><img src={product.img} alt={product.name} className={styles.productImage} /></div>
-            <div className={styles.productDetails}>
-                <div className={styles.ratingPlace}>
-                    <div className={styles.ratingBlock}><StyledRating name="read-only" value={product.reviews?.rating || 0}
-                                                               readOnly/></div>
-                    <div className={styles.ratingBlock}><p>{product.reviews?.reviewsAmount || "Нет "}</p></div>
+                    {/*<Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<ShoppingCartIcon />}
+                        onClick={handleAddToCart}
+                    >
+                        В корзину
+                    </Button>;*/}
                 </div>
-                {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
-                <p className={styles.productName}> <LimitedText text={product.name} maxLines={2} /></p>
-                <p className= {styles.descriptionBlock}>{product.category}</p>
-                <div className={styles.price}>{formatNumber(product.price)} тг
-                    {/* <div className={styles.rassrochkaContainer}>
-                    <p className={styles.rassrochkaPrice}>{formatNumber(parseInt(product.price / 12))} т</p>
-                    <p className={styles.rassrochkaMonth}>х12</p>
-                    </div>*/}
-                </div>
-                
-                <div className="ks-widget"
-                    data-template="button"
-                    data-merchant-sku={product.sku}
-                    data-merchant-code={merchant}
-                    data-city="750000000"
-                    //style={{width: "200px", height: "auto"}}
-                ></div>
-
-                {/*<Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<ShoppingCartIcon />}
-                    onClick={handleAddToCart}
-                >
-                    В корзину
-                </Button>;*/}
             </div>
-        </div>
+        </>
     );
 };
 
