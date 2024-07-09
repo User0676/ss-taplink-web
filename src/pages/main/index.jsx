@@ -140,7 +140,7 @@ export const Home = () => {
     //     console.error('Line Number:', lineno);
     //     console.error('Column Number:', colno);
     //     console.error('Error Object:', error);
-      
+
     //     // Return true to prevent the default browser error handling
     //     return true;
     //   };
@@ -149,16 +149,18 @@ export const Home = () => {
         <>
             <CartProvider>
             <div className={styles.app}>
-                <Header title={title}/>
-                <div className={styles.container}>
+
+                <div className={styles.headerContainer}>
+                    <Header title={title}/>
                     <SearchBar onSubmit={handleSearchSubmit} />
                     <FilterSortControls onSortChange={handleSortChange} onViewChange={handleViewChange} />
-                    <ProductGrid viewType={viewType} sortType={sortType} products={products.products} isLoading={isLoading} merchant={merchantCode}/>
+
                 </div>
+                <ProductGrid viewType={viewType} sortType={sortType} products={products.products} isLoading={isLoading} merchant={merchantCode}/>
                 <CartModal />
                 <CartDetailsModal />
                 <ProductDetailsModal />
-                <ProductFilterModal 
+                <ProductFilterModal
                     onFilterApply={onFilterApply}
                     categories={products.filter?.categories}
                     brands={products.filter?.brands}
@@ -170,7 +172,7 @@ export const Home = () => {
                 />
                 <SortModal onSortChange={handleSortChange} />
             </div>
-        
+
             </CartProvider>
         </>
     )

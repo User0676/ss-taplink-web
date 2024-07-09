@@ -1,0 +1,14 @@
+.header {
+  background: black;
+  color: white;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  transition: all .3s ease;
+}
+.header.out {
+  transform: translateY(-100%);
+}
+.header a {
+  color: white;
+}
