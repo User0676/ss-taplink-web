@@ -1,13 +1,25 @@
 .app {
-  background-color: white;
+  background-color: #f6f6f6;
   min-height: 100vh;
 }
+
 
 .headerContainer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
+  background-color: white;
+  //margin-bottom: 5px;
 }
+
+.allRating{
+
+}
+.ratingNumber{
+
+
+}
+.ratingCnt
 
 
 * {
@@ -73,5 +85,9 @@ ul li {
 }
 img {
   vertical-align: top;
+}
+
+.searchAndFilter{
+  display: flex;
 }
 

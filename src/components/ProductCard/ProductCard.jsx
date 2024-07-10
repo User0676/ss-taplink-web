@@ -104,6 +104,7 @@ const ProductCard = ({ product, merchant, cityId }) => {
         <>
             {isFetching && <Loading/>}
             <div className={styles.productCard} onClick={handleOpenProductDetails} style={{display: isFetching ? "none" : "block"}}>
+                <div className={styles.productsContainer}>
                 <div className={styles.imageFormat}><img src={product.img} alt={product.name} className={styles.productImage} /></div>
                 <div className={styles.productDetails}>
                     <div className={styles.ratingPlace}>
@@ -114,21 +115,26 @@ const ProductCard = ({ product, merchant, cityId }) => {
                     {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
                     <p className={styles.productName}> <LimitedText text={product.name} maxLines={2} /></p>
                     <p className= {styles.descriptionBlock}>{product.category}</p>
-                    <div className={styles.price}>{formatNumber(product.price)} тг
+                    <div className={styles.price}>
+                        <div className={styles.PriceFull}>{formatNumber(product.price)} ₸</div>
                         {/* <div className={styles.rassrochkaContainer}>
                         <p className={styles.rassrochkaPrice}>{formatNumber(parseInt(product.price / 12))} т</p>
                         <p className={styles.rassrochkaMonth}>х12</p>
                         </div>*/}
-                    </div>
-                    
+
+
                     <div className="ks-widget"
-                        data-template="button"
+                        //data-template="button"
+                         data-template="flatButton"
                         data-merchant-sku={product.sku}
                         data-merchant-code={merchant}
                         data-city="750000000"
-                        
+                        data-style="small"
+
                         //style={{width: "200px", height: "auto"}}
                     ></div>
+                    </div>
+                </div>
 
                     {/*<Button
                         variant="contained"

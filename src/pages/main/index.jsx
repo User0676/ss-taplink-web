@@ -24,12 +24,18 @@ export const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [filterIsLoading, setfilterIsLoading] = useState(false)
     const [merchantCode, setMerchantCode] = useState("")
+    const [merchantLogo, setMerchantLogo] = useState("")
+    const [merchantPhone, setMerchantPhone] = useState("")
+    const [rating, setRating] = useState(null)
+    const [ratingCount, setRatingCount] = useState(null)
     const [searchParams, setSearchParams] = useSearchParams();
     const [productsToShowCount, setProductsToShowCount] = useState(10)
 
     //const [storeId, setStoreId] = useState("")
 
     const [title, setTitle] = useState('');
+
+
 
     const [products, setProducts] = useState([]);
 
@@ -98,6 +104,10 @@ export const Home = () => {
             setTitle(response.data.name)
             setMerchantCode(response.data.storeId)
             setId(response.data._id)
+            setMerchantLogo(response.data.logo)
+            setMerchantPhone(response.data.phone)
+            setRatingCount(response.data.ratingCount)
+            setRating(response.data.rating)
             console.log(response.data)
             console.log(id)
         }).catch((error) => {
@@ -150,9 +160,14 @@ export const Home = () => {
             <div className={styles.app}>
 
                 <div className={styles.headerContainer}>
-                    <Header title={title}/>
+                    <div className={styles.shopInfo}>
+                    <Header title={title} logo={merchantLogo} phone={merchantPhone} rating={rating} ratingCount={ratingCount} />
+                        <></>
+                    </div>
+                    <div className={styles.searchAndFilter}>
                     <SearchBar onSubmit={handleSearchSubmit} />
                     <FilterSortControls onSortChange={handleSortChange} onViewChange={handleViewChange} />
+                    </div>
                 </div>
                 <ProductGrid viewType={viewType} sortType={sortType} products={products.products} productsToShowCount={productsToShowCount} isLoading={isLoading} merchant={merchantCode} cityId={"750000000"}/>
                 <ShowMoreButton onClick={showMore} isShow={!isLoading && productsToShowCount < products.products?.length} />

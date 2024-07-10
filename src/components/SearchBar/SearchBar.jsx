@@ -6,17 +6,27 @@ import { CartContext } from '../../contexts/CartContext';
 import { styled } from '@mui/material/styles';
 
 const GreenBorderTextField = styled(TextField)({
+
+    '& .MuiOutlinedInput-input':{
+        width: '280px'
+    },
     '& .MuiOutlinedInput-root': {
+        //height: '1em',
         '& fieldset': {
             //borderRadius: '16px',
-            borderColor: 'lightgray'
+            borderColor: 'lightgray',
+            //height: '1.5em',
+
 
         },
         '&:hover fieldset': {
             borderColor: 'lightgray',
+            //height: '1.5em',
+
         },
         '&.Mui-focused fieldset': {
             borderColor: 'grey',
+            //height: '1em',
         },
     },
 });
