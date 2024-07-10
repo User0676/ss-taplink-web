@@ -49,7 +49,7 @@ const SearchBar = ({onSubmit}) => {
                     onKeyPress={handleKeyPress} // добавляем обработчик нажатия клавиши
                 />
             </div>
-            <button className={styles.filterButton} onClick={openFilterModal}><FilterListIcon className="FLIcon" /></button>
+            {/*<button className={styles.filterButton} onClick={openFilterModal}><FilterListIcon className="FLIcon" /></button>*/}
         </div>
     );
 };
