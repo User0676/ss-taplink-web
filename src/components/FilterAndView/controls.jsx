@@ -7,13 +7,16 @@ import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import SortIcon from '@mui/icons-material/Sort';
 import { CartContext } from '../../contexts/CartContext';
 import { styled } from '@mui/material/styles';
+import sortikIcon from '../../assets/icons/sortikIcon.svg'
 
 const CustomButtonGroup = styled(ButtonGroup)({
+
     '.MuiButtonGroup-grouped': {
         minWidth: '40px',
         color: 'black',
         borderColor: 'lightgrey',
         //top: '-25px'
+
     },
     '&:hover fieldset': {
         borderColor: 'lightgray',
@@ -21,6 +24,7 @@ const CustomButtonGroup = styled(ButtonGroup)({
     '&.Mui-focused fieldset': {
         borderColor: 'grey',
     },
+
 });
 
 const RoundedSortIcon = styled(SortIcon)({
@@ -28,6 +32,7 @@ const RoundedSortIcon = styled(SortIcon)({
     backgroundColor: 'transparent',
     padding: '4px',
     boxSizing: 'border-box',
+    fontSize: '2rem !important'
 });
 
 const FilterSortControls = ({ onViewChange, onSortChange }) => {
@@ -37,8 +42,9 @@ const FilterSortControls = ({ onViewChange, onSortChange }) => {
         <div className={styles.filterSortControls}>
             <CustomButtonGroup variant="outlined" aria-label="outlined button group" className={styles.sortAll}>
                 <Button onClick={openSortModal} className={styles.sortFull}>
-                    <RoundedSortIcon />
-                    {sortType}
+                    <RoundedSortIcon style={{ fontSize: '1.8rem' }}/>
+
+
                 </Button>
             </CustomButtonGroup>
         </div>

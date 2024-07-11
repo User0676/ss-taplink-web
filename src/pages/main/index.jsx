@@ -14,6 +14,7 @@ import { config } from '../../config';
 import axios from 'axios';
 import { useParams, useSearchParams } from 'react-router-dom';
 import ShowMoreButton from '../../components/ShowMoreButton/showMoreButton';
+import Loading from "../../components/Loading/Loading";
 
 
 export const Home = () => {
@@ -30,13 +31,11 @@ export const Home = () => {
     const [ratingCount, setRatingCount] = useState(null)
     const [searchParams, setSearchParams] = useSearchParams();
     const [productsToShowCount, setProductsToShowCount] = useState(10)
+    const [isFetching, setIsFetching] = useState(true);
 
-    //const [storeId, setStoreId] = useState("")
+    const [productsLoading, setProductsLoading] = useState(true);
 
     const [title, setTitle] = useState('');
-
-
-
     const [products, setProducts] = useState([]);
 
     const [body, setBody] = useState({
@@ -56,11 +55,13 @@ export const Home = () => {
 
     useEffect(() => {
         fetchStoreData(id)
+
     }, [slug])
 
     useEffect(() => {
         fetchProducts()
     }, [body, id])
+
 
     const onFilterApply = (filter) => {
         setBody({
@@ -99,6 +100,7 @@ export const Home = () => {
     // }
 
     const fetchStoreData = (id) => {
+        setIsFetching(true)
         axios.get(`${config.apiUrl}/store/${slug}`).then((response) => {
             //console.log(response.data)
             setTitle(response.data.name)
@@ -110,7 +112,9 @@ export const Home = () => {
             setRating(response.data.rating)
             console.log(response.data)
             console.log(id)
+            setIsFetching(false)
         }).catch((error) => {
+            setIsFetching(false)
             console.log(error)
         })
     }
@@ -154,14 +158,19 @@ export const Home = () => {
         setProductsToShowCount(productsToShowCount + 10)
     }
 
+    // if (isFetching || filterIsLoading || isLoading || !products.products || productsLoading) {
+    //     return <Loading/>
+    // }
+
     return (
         <>
+            {(isFetching || filterIsLoading || isLoading || !products.products || productsLoading) && <Loading/>}
             <CartProvider>
-            <div className={styles.app}>
+            <div className={styles.app} style={{ display: (isFetching || filterIsLoading || isLoading || !products.products || productsLoading) ? "none" : "block" }}>
 
                 <div className={styles.headerContainer}>
                     <div className={styles.shopInfo}>
-                    <Header title={title} logo={merchantLogo} phone={merchantPhone} rating={rating} ratingCount={ratingCount} />
+                    <Header title={title} logo={merchantLogo} phone={merchantPhone} rating={rating} isFetching={isFetching} ratingCount={ratingCount} />
                         <></>
                     </div>
                     <div className={styles.searchAndFilter}>
@@ -169,7 +178,7 @@ export const Home = () => {
                     <FilterSortControls onSortChange={handleSortChange} onViewChange={handleViewChange} />
                     </div>
                 </div>
-                <ProductGrid viewType={viewType} sortType={sortType} products={products.products} productsToShowCount={productsToShowCount} isLoading={isLoading} merchant={merchantCode} cityId={"750000000"}/>
+                <ProductGrid setProductsLoading={setProductsLoading} viewType={viewType} sortType={sortType} products={products.products} productsToShowCount={productsToShowCount} isLoading={isLoading} merchant={merchantCode} cityId={"750000000"}/>
                 <ShowMoreButton onClick={showMore} isShow={!isLoading && productsToShowCount < products.products?.length} />
                 <CartModal />
                 <CartDetailsModal />
@@ -189,7 +198,7 @@ export const Home = () => {
 
             </CartProvider>
         </>
-    )
+    );
 }
 
-export default Home
+export default Home;

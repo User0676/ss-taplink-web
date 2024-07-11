@@ -32,10 +32,10 @@ export function useInterval(callback, delay) {
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
-        color: '#F9E076',
+        color: '#f24634',
     },
     '& .MuiRating-iconHover': {
-        color: '#F9E076',
+        color: '#f24634',
     },
 });
 
@@ -58,7 +58,7 @@ const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
 
-const ProductCard = ({ product, merchant, cityId }) => {
+const ProductCard = ({ product, merchant, cityId, setProductsLoading }) => {
     const { addToCart, openProductDetails } = useContext(CartContext);
     const [isFetching, setIsFetching] = useState(true)
 
@@ -67,9 +67,12 @@ const ProductCard = ({ product, merchant, cityId }) => {
         if (children?.length) {
             setIsFetching(false)
             document.querySelector(`div [data-merchant-sku="${product.sku}"]`).className = ""
+            setProductsLoading(false)
+            console.log("SetProductsLoading set to false")
         }
+        console.log("SetProductsLoading set to false")
         //console.log(children)
-        //setIsFetching(false)
+        setIsFetching(false)
     }, isFetching ? 1000 : null)
 
     // useEffect(async () => {
@@ -99,6 +102,8 @@ const ProductCard = ({ product, merchant, cityId }) => {
         openProductDetails(product);
     };
 
+
+
     return (
 
         <>
@@ -106,35 +111,45 @@ const ProductCard = ({ product, merchant, cityId }) => {
             <div className={styles.productCard} onClick={handleOpenProductDetails} style={{display: isFetching ? "none" : "block"}}>
                 <div className={styles.productsContainer}>
                 <div className={styles.imageFormat}><img src={product.img} alt={product.name} className={styles.productImage} /></div>
-                <div className={styles.productDetails}>
-                    <div className={styles.ratingPlace}>
-                        <div className={styles.ratingBlock}><StyledRating name="read-only" value={product.reviews?.rating || 0}
-                                                                readOnly/></div>
-                        <div className={styles.ratingBlock}><p>{product.reviews?.reviewsAmount || "Нет "}</p></div>
-                    </div>
-                    {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
-                    <p className={styles.productName}> <LimitedText text={product.name} maxLines={2} /></p>
-                    <p className= {styles.descriptionBlock}>{product.category}</p>
-                    <div className={styles.price}>
-                        <div className={styles.PriceFull}>{formatNumber(product.price)} ₸</div>
-                        {/* <div className={styles.rassrochkaContainer}>
+                    <div className={styles.productDetails}>
+
+                        {/* <div className="class-rating">{renderStars(product.rating)}</div>*/}
+                        <p className={styles.productName}><LimitedText text={product.name} maxLines={2}/></p>
+                        <p className={styles.descriptionBlock}>{product.category}</p>
+
+                        <div className={styles.ratingPlace}>
+                            <div className={styles.ratingBlock}><StyledRating name="read-only"
+                                                                              value={product.reviews?.rating || 0}
+                                                                              readOnly/></div>
+                            <div className={styles.ratingBlock}>
+                                {product.reviews?.reviewsAmount > 0 ? (
+                                    <p>{product.reviews.reviewsAmount} (отзывов)</p>
+                                ) : (
+                                    ''
+                                )}
+                            </div>
+                        </div>
+
+                        <div className={styles.price}>
+                            <div className={styles.PriceFull}>{formatNumber(product.price)} ₸</div>
+                            {/* <div className={styles.rassrochkaContainer}>
                         <p className={styles.rassrochkaPrice}>{formatNumber(parseInt(product.price / 12))} т</p>
                         <p className={styles.rassrochkaMonth}>х12</p>
                         </div>*/}
 
 
-                    <div className="ks-widget"
-                        //data-template="button"
-                         data-template="flatButton"
-                        data-merchant-sku={product.sku}
-                        data-merchant-code={merchant}
-                        data-city="750000000"
-                        data-style="small"
+                            <div className="ks-widget"
+                                //data-template="button"
+                                 data-template="flatButton"
+                                 data-merchant-sku={product.sku}
+                                 data-merchant-code={merchant}
+                                 data-city="750000000"
+                                 data-style="small"
 
-                        //style={{width: "200px", height: "auto"}}
-                    ></div>
+                                //style={{width: "200px", height: "auto"}}
+                            ></div>
+                        </div>
                     </div>
-                </div>
 
                     {/*<Button
                         variant="contained"

@@ -27,22 +27,31 @@
     font-weight: normal;
     font-size: 16px;
     color: #0089d0;
+    margin-bottom: -5px;
   }
   .shopLogo{
     max-width: 90%;
-    max-height: 90%;
+    max-height: 100%;
 
     //height: 150px;
     object-fit: cover; // для обрезки если изображение большое
   }
+  .kaspiLogo{
+    width:100px;
+    padding: 7px;
+  }
+
 
   .shopName{
-    font-size: 24px;
-
+    font-size: 16px;
+    margin-bottom: -10px;
   }
 
   .shopInfo{
-    margin-top: 8px;
+    margin-top: -3px;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: normal;
   }
 
 }
@@ -50,12 +59,33 @@
 
 .ratingNumber{
   font-size:14px;
-  margin: 0px;
+  margin-left: 5px;
+  font-weight: normal;
+}
+.ratingCnt{
+  margin: 0 0;
+}
+
+.onlyStarRating{
+  margin-top: 10px;
 }
 
 .shopRating{
- font-size:12px;
+ font-size:14px;
   color: grey;
+
+}
+
+.starAndRating{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: -6px;
+
+}
+
+.ratingContainer{
+
 }
 
 

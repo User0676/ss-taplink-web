@@ -23,7 +23,7 @@ const sortProducts = (products, sortType) => {
     }
 };
 
-const ProductGrid = ({ viewType, sortType, products, isLoading, merchant, cityId, productsToShowCount }) => {
+const ProductGrid = ({ viewType, sortType, products, isLoading, merchant, cityId, productsToShowCount, setProductsLoading }) => {
     const [productsCount, setProductsCount] = useState(productsToShowCount);
     const initButton = () => {
         ((d, s, id) => {
@@ -87,7 +87,7 @@ const ProductGrid = ({ viewType, sortType, products, isLoading, merchant, cityId
     return (
         <div className={viewType === 'grid' ? styles.productGrid : styles.productList}>
             {products.slice(0, productsCount).map((product) => (
-                <ProductCard key={product.id} product={product} merchant={merchant} cityId={cityId}/>
+                <ProductCard key={product.id} product={product} merchant={merchant} cityId={cityId} setProductsLoading={setProductsLoading}/>
             ))}
         </div>
     );

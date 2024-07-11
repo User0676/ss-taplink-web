@@ -15,11 +15,14 @@ const SortModal = ({ onSortChange }) => {
             {isSortModalOpen && <div className={styles.blurBackground}></div>}
             <div className={`${styles.sortModal} ${isSortModalOpen ? styles.show : ''}`}>
                 <div className={styles.modalContent}>
-                    <button className={styles.closeButton} onClick={closeSortModal}>✕</button>
+
                     <fieldset className={styles.fieldset}>
-                        <legend className={styles.legend}>Сортировка</legend>
+                        <div className={styles.fOpenAndClose}><legend className={styles.legend}>Сортировка</legend>
+                        <button className={styles.closeButton} onClick={closeSortModal}>✕</button>
+                        </div>
                         <div className={styles.radioGroup}>
-                            <label className={`${styles.radioLabel} ${sortType === "Сначала дешевые" ? styles.selected : ''}`}>
+                            <label
+                                className={`${styles.radioLabel} ${sortType === "Сначала дешевые" ? styles.selected : ''}`}>
                                 <span className={styles.radioText}>Сначала дешевые</span>
                                 <input
                                     type="radio"
@@ -29,7 +32,8 @@ const SortModal = ({ onSortChange }) => {
                                     className={styles.radioInput}
                                 />
                             </label>
-                            <label className={`${styles.radioLabel} ${sortType === "Сначала дорогие" ? styles.selected : ''}`}>
+                            <label
+                                className={`${styles.radioLabel} ${sortType === "Сначала дорогие" ? styles.selected : ''}`}>
                                 <span className={styles.radioText}>Сначала дорогие</span>
                                 <input
                                     type="radio"
@@ -39,7 +43,8 @@ const SortModal = ({ onSortChange }) => {
                                     className={styles.radioInput}
                                 />
                             </label>
-                            <label className={`${styles.radioLabel} ${sortType === "Высокий рейтинг" ? styles.selected : ''}`}>
+                            <label
+                                className={`${styles.radioLabel} ${sortType === "Высокий рейтинг" ? styles.selected : ''}`}>
                                 <span className={styles.radioText}>Высокий рейтинг</span>
                                 <input
                                     type="radio"

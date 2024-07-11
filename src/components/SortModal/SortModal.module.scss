@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50%;
+  height: 40%;
   background-color: white;
   z-index: 1000;
   display: flex;
@@ -33,9 +33,14 @@
   position: relative;
 }
 
+.fOpenAndClose{
+  display:flex;
+  justify-content: center;
+}
+
+
 .closeButton {
   position: absolute;
-  top: 16px;
   right: 30px;
   background: none;
   border: none;
@@ -52,7 +57,7 @@
 .legend {
   font-size: 2em;
   font-weight: 300;
-  margin-bottom: 10%;
+  margin-bottom: 2%;
 }
 
 .radioGroup {
@@ -72,8 +77,8 @@
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   font-weight: 300;
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
 .radioLabel.selected {
@@ -91,7 +96,7 @@
 .radioText {
   flex-grow: 1;
   text-align: left;
-  font-size: 1.2lh;
+  font-size: 1.1lh;
 }
 
 .blurBackground {
