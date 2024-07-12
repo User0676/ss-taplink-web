@@ -10,3 +10,7 @@ const Loading = ({ size = 'default', height = 300 }) => {
 }
 
 export default Loading
+
+
+
+

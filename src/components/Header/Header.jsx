@@ -82,7 +82,11 @@ const Header = (props) => {
                 {renderLogo(props.logo)}
                 <div className={styles.shopInfo}>
                     <h1 className={styles.shopName}>{props.title}</h1>
-                    <h2 className={styles.shopNumber}>{makeMask(props.phone)}</h2>
+                    <h2 className={styles.shopNumber}>
+                        <a href={`tel:${props.phone}`} className={styles.phoneLink}>
+                            {makeMask(props.phone)}
+                        </a>
+                    </h2>
                    <div className={styles.ratingContainer}> {renderRating(props.rating, props.ratingCount)}</div>
                 </div>
             </div>

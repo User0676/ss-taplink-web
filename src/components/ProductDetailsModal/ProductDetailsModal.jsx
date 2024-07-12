@@ -12,10 +12,10 @@ import {Rating} from "@mui/material";
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
-        color: '#F9E076',
+        color: '#f24634',
     },
     '& .MuiRating-iconHover': {
-        color: '#F9E076',
+        color: '#f24634',
     },
 });
 
@@ -85,6 +85,7 @@ const ProductDetailsModal = () => {
         return (
             <>
                 <div>
+
                     {visibleCharacteristics.map((characteristic, index) => (
                         <div key={index}>
                             <strong>{characteristic.name}</strong>
@@ -189,9 +190,14 @@ const ProductDetailsModal = () => {
 
                 {productData &&
                     <div className={styles.productDetails}>
-                        <h2 className={styles.descriptionName}>Характеристики</h2>
-                        <div className={styles.characteristicsByOne}> {renderCharacteristics(productData.characteristics)}</div>
-
+                        {productData.characteristics.length > 0 && (
+                            <>
+                                <h2 className={styles.descriptionName}>Характеристики</h2>
+                                <div className={styles.characteristicsByOne}>
+                                    {renderCharacteristics(productData.characteristics)}
+                                </div>
+                            </>
+                        )}
                         <div className={styles.reviewComponents}>
                             <div className={styles.reviewComponent2}>
                                 <p>Оценка и Отзывы</p>

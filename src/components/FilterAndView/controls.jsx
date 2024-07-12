@@ -15,6 +15,7 @@ const CustomButtonGroup = styled(ButtonGroup)({
         minWidth: '40px',
         color: 'black',
         borderColor: 'lightgrey',
+        marginLeft: '5px'
         //top: '-25px'
 
     },

@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useParams, useSearchParams } from 'react-router-dom';
 import ShowMoreButton from '../../components/ShowMoreButton/showMoreButton';
 import Loading from "../../components/Loading/Loading";
+import LoadingText from "../../components/Loading/LoadingWithText/LoadingText";
 
 
 export const Home = () => {
@@ -164,7 +165,7 @@ export const Home = () => {
 
     return (
         <>
-            {(isFetching || filterIsLoading || isLoading || !products.products || productsLoading) && <Loading/>}
+            {(isFetching || filterIsLoading || isLoading || !products.products || productsLoading) && <LoadingText size="default" text="Ищем товары магазина..."/>}
             <CartProvider>
             <div className={styles.app} style={{ display: (isFetching || filterIsLoading || isLoading || !products.products || productsLoading) ? "none" : "block" }}>
 

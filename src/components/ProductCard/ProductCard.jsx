@@ -68,9 +68,9 @@ const ProductCard = ({ product, merchant, cityId, setProductsLoading }) => {
             setIsFetching(false)
             document.querySelector(`div [data-merchant-sku="${product.sku}"]`).className = ""
             setProductsLoading(false)
-            console.log("SetProductsLoading set to false")
+            //console.log("SetProductsLoading set to false")
         }
-        console.log("SetProductsLoading set to false")
+        //console.log("SetProductsLoading set to false")
         //console.log(children)
         setIsFetching(false)
     }, isFetching ? 1000 : null)
@@ -107,7 +107,7 @@ const ProductCard = ({ product, merchant, cityId, setProductsLoading }) => {
     return (
 
         <>
-            {isFetching && <Loading/>}
+            {isFetching && <Loading size="default"/>}
             <div className={styles.productCard} onClick={handleOpenProductDetails} style={{display: isFetching ? "none" : "block"}}>
                 <div className={styles.productsContainer}>
                 <div className={styles.imageFormat}><img src={product.img} alt={product.name} className={styles.productImage} /></div>
@@ -121,13 +121,12 @@ const ProductCard = ({ product, merchant, cityId, setProductsLoading }) => {
                             <div className={styles.ratingBlock}><StyledRating name="read-only"
                                                                               value={product.reviews?.rating || 0}
                                                                               readOnly/></div>
-                            <div className={styles.ratingBlock}>
+
                                 {product.reviews?.reviewsAmount > 0 ? (
-                                    <p>{product.reviews.reviewsAmount} (отзывов)</p>
+                                    <p className={styles.reviewAmount}>{product.reviews.reviewsAmount} (отзывов)</p>
                                 ) : (
                                     ''
                                 )}
-                            </div>
                         </div>
 
                         <div className={styles.price}>
