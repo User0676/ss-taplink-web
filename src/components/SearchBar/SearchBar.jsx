@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 const GreenBorderTextField = styled(TextField)({
 
     '& .MuiOutlinedInput-input':{
-        width: '280px'
+       // width: '280px'
     },
     '& .MuiOutlinedInput-root': {
         //height: '1em',
