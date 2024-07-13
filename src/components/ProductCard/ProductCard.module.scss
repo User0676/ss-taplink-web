@@ -17,7 +17,10 @@
     flex-direction: row;
     border-radius: 0px;
     padding-bottom: 0;
+
   }
+
+
 
   .productDetails{
 
@@ -103,9 +106,9 @@ p{
     margin-top: -5px;
     flex-direction: row;
   }
-
-
-
+  @media(max-width: 370px){
+    flex-direction: column;
+  }
 }
 
 .ratingPlace{
@@ -125,7 +128,7 @@ p{
 .ratingBlock {
   position: relative;
   display: inline-block;
-  border: 1px solid white;
+  border: 1px;
   margin: 2px;
   color: gray;
   right : 5px;
@@ -227,6 +230,9 @@ p{
   @media (max-width: 720px) {
     width: 100%;
     margin-top: 8px;
+  }
+  @media(max-width: 370px){
+    margin-bottom: 5px;
   }
 }
 
