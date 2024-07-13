@@ -61,10 +61,21 @@ const formatNumber = (num) => {
 const ProductCard = ({ product, merchant, cityId, setProductsLoading }) => {
     const { addToCart, openProductDetails } = useContext(CartContext);
     const [isFetching, setIsFetching] = useState(true)
+    const [isError, setIsError] = useState(false)
+    const [tries, setTries] = useState(0)
 
     useInterval(() => {
+        setTries(tries + 1)
+        if (tries >= 1) {
+            setIsFetching(false)
+            setIsError(true)
+            return
+        }
         const children = document.querySelector(`div [data-merchant-sku="${product.sku}"]`)?.children
         if (children?.length) {
+            console.log(`product ${product.name} children`)
+            console.log(children)
+            console.log(product.sku)
             setIsFetching(false)
             document.querySelector(`div [data-merchant-sku="${product.sku}"]`).className = ""
             setProductsLoading(false)
@@ -72,8 +83,8 @@ const ProductCard = ({ product, merchant, cityId, setProductsLoading }) => {
         }
         //console.log("SetProductsLoading set to false")
         //console.log(children)
-        setIsFetching(false)
-    }, isFetching ? 1000 : null)
+        //setIsFetching(true)
+    }, tries <= 1 && isFetching ? 1000 : null)
 
     // useEffect(async () => {
     //     await getProductExist()
@@ -108,7 +119,7 @@ const ProductCard = ({ product, merchant, cityId, setProductsLoading }) => {
 
         <>
             {isFetching && <Loading size="default"/>}
-            <div className={styles.productCard} onClick={handleOpenProductDetails} style={{display: isFetching ? "none" : "block"}}>
+            <div className={styles.productCard} onClick={handleOpenProductDetails} style={{display: isFetching || isError ? "none" : "block"}}>
                 <div className={styles.productsContainer}>
                 <div className={styles.imageFormat}><img src={product.img} alt={product.name} className={styles.productImage} /></div>
                     <div className={styles.productDetails}>

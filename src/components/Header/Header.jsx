@@ -21,7 +21,7 @@ const Header = (props) => {
     const [showAllReviews, setShowAllReviews] = useState(false);
 
     const makeMask = (phoneNumber) => {
-        if (!phoneNumber.startsWith("+7") || phoneNumber.length !== 12) {
+        if (!phoneNumber?.startsWith("+7") || phoneNumber.length !== 12) {
             return phoneNumber
         }
 
